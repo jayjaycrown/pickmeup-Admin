@@ -1,0 +1,83 @@
+<div class="header header-color py-5 py-lg-7">
+  <div class="container">
+    <div class="header-body text-center mb-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-6">
+          <h1>Welcome!</h1>
+          <!-- <p class="text-lead text-light">Use these awesome forms to login or create new account in your project for free.</p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Page content -->
+<div class="container mt--8 pb-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-5 col-md-7">
+      <div class="card shadow border-0">
+        <div class="card-header bg-transparent pb-5">
+          <div class="text-muted text-center mt-2 mb-3"><small>Sign in with</small></div>
+          <div class="btn-wrapper text-center">
+            <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
+              <span class="btn-inner--icon"><img src="../assets/img/icons/common/github.svg"></span>
+              <span class="btn-inner--text">Github</span>
+            </a>
+            <a href="javascript:void(0)" class="btn btn-neutral btn-icon">
+              <span class="btn-inner--icon"><img src="../assets/img/icons/common/google.svg"></span>
+              <span class="btn-inner--text">Google</span>
+            </a>
+          </div>
+        </div>
+        <div class="card-body px-lg-5 py-lg-5">
+          <div class="text-center text-muted mb-4">
+            <p>Or sign in with credentials</p>
+          </div>
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-group mb-3">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                </div>
+                <input type="email" required autocomplete="email" formControlName="email" class="form-control"
+                	[ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+
+							</div>
+							<div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+								<div *ngIf="f.email.errors.required">email is required</div>
+							</div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                </div>
+                <input type="password" required autocomplete="current-password" formControlName="password"
+                	class="form-control"
+                	[ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+							</div>
+							<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+								<div *ngIf="f.password.errors.required">Password is required</div>
+							</div>
+            </div>
+
+            <div class="text-center">
+              <button [disabled]="!loginForm.valid" class="btn btn-primary my-4">
+              	<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+              	Login
+              </button>
+              <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-6">
+          <a [routerLink]="['/app/auth/forgot']" class="text-dark">Forgot password?</a>
+        </div>
+        <div class="col-6 text-right">
+          <a [routerLink]="['/app/auth/register']" routerLinkActive="router-link-active"  class="text-dark">Create new account</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
