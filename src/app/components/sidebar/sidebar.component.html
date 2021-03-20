@@ -12,7 +12,7 @@
     </a>
     <!-- User -->
     <ul class="nav align-items-center d-md-none">
-      <li class="nav-item" ngbDropdown placement="bottom-right">
+      <!-- <li class="nav-item" ngbDropdown placement="bottom-right">
         <a class="nav-link nav-link-icon" role="button" ngbDropdownToggle>
           <i class="ni ni-bell-55"></i>
         </a>
@@ -22,7 +22,7 @@
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="javascript:void(0)">Something else here</a>
         </div>
-      </li>
+      </li> -->
       <li class="nav-item" ngbDropdown placement="bottom-right">
         <a class="nav-link" role="button" ngbDropdownToggle>
           <div class="media align-items-center">
@@ -39,23 +39,11 @@
             <i class="ni ni-single-02"></i>
             <span>My profile</span>
           </a>
-          <a routerLinkActive="active" [routerLink]="['/user-profile']" class="dropdown-item">
-            <i class="ni ni-settings-gear-65"></i>
-            <span>Settings</span>
-          </a>
-          <a routerLinkActive="active" [routerLink]="['/user-profile']" class="dropdown-item">
-            <i class="ni ni-calendar-grid-58"></i>
-            <span>Activity</span>
-          </a>
-          <a routerLinkActive="active" [routerLink]="['/user-profile']" class="dropdown-item">
-            <i class="ni ni-support-16"></i>
-            <span>Support</span>
-          </a>
           <div class="dropdown-divider"></div>
-          <a href="#!" class="dropdown-item">
-            <i class="ni ni-user-run"></i>
-            <span>Logout</span>
-          </a>
+         <a (click)="openModal(template)" style="cursor: pointer;" class="dropdown-item">
+         	<i class="ni ni-user-run"></i>
+         	<span>Logout</span>
+         </a>
         </div>
       </li>
     </ul>
@@ -112,3 +100,12 @@
     </div>
   </div>
 </nav>
+
+
+<ng-template #template>
+	<div class="modal-body text-center">
+		<p>Are you sure you want to <b>LOG OUT</b>?</p>
+		<button type="button" class="btn btn-primary" (click)="confirm()">Yes</button>
+		<button type="button" class="btn btn-light" (click)="decline()">No</button>
+	</div>
+</ng-template>

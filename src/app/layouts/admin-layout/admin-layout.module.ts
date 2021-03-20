@@ -25,6 +25,9 @@ import { InboxComponent } from "../../pages/inbox/inbox.component";
 import { RidersComponent } from "../../pages/riders/riders.component";
 import { RidersDetailsComponent } from "../../pages/riders/riders-details/riders-details.component";
 import { RequestDetailsComponent } from "../../pages/requests/request-details/request-details.component";
+import { LocationComponent } from '../../pages/location/location.component';
+import { UsersComponent } from '../../pages/users/users.component';
+import { UserDetailsComponent } from '../../pages/users/user-details/user-details.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -52,6 +55,9 @@ import { RequestDetailsComponent } from "../../pages/requests/request-details/re
 		BroadcastsComponent,
 		InboxComponent,
 		RidersDetailsComponent,
+		LocationComponent,
+		UsersComponent,
+		UserDetailsComponent
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

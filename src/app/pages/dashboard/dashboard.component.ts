@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from "../../_services/user.service";
+import { User } from "../../_models/user";
 import Chart from 'chart.js';
 
 // core components
@@ -20,9 +22,31 @@ export class DashboardComponent implements OnInit {
   public data: any;
   public salesChart;
   public clicked = true;
-  public clicked1 = false;
+	public clicked1 = false;
+	adminDetails: any;
+	summary;
+	constructor(
+		private user: UserService
+	) {}
 
-  ngOnInit() {
+	getSummary(token) {
+		console.log(token);
+		this.user.fetchSummary(token).subscribe((res: any) => {
+			console.log(res);
+			this.summary = res.summary;
+		});
+	}
+	async ngOnInit() {
+		const user = await JSON.parse(localStorage.getItem("user"));
+		// console.log(user);
+		const token = user.token;
+		console.log(token);
+		this.getSummary(token);
+		this.user.getAdminProfile(token).subscribe((res: any) => {
+			// console.log(res);
+			this.adminDetails = res.adminDetails;
+			// console.log(this.adminDetails);
+		});
 
     this.datasets = [
       [0, 20, 10, 30, 15, 40, 20, 60, 60],

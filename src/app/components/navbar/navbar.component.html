@@ -1,7 +1,8 @@
 <nav class="navbar navbar-top navbar-expand-md navbar-light" id="navbar-main">
   <div class="container-fluid">
     <!-- Brand -->
-    <a class="h4 mb-0 text-black text-uppercase d-none d-lg-inline-block" routerLinkActive="active" [routerLink]="['/dashboard']">{{getTitle()}}</a>
+    <a class="h4 mb-0 text-black text-uppercase d-none d-lg-inline-block" routerLinkActive="active"
+    	[routerLink]="['/dashboard']">Admin</a>
 
     <!-- User -->
     <ul class="navbar-nav align-items-center d-none d-md-flex">
@@ -12,7 +13,8 @@
               <img alt="Image placeholder" src="assets/img/theme/team-4-800x800.jpg">
             </span>
             <div class="media-body ml-2 d-none d-lg-block">
-              <span class="mb-0 text-sm  font-weight-bold">Jessica Jones</span>
+              <span class="mb-0 text-sm  font-weight-bold">{{ adminDetails.firstName }}
+              	{{ adminDetails.lastName }}</span>
             </div>
           </div>
         </a>

@@ -96,7 +96,7 @@
 		<div class="col">
 			<div class="card shadow">
 				<div class="card-header border-0">
-					<h3 class="mb-0">Riders Details</h3>
+					<h3 class="mb-0">Unverified Riders Details</h3>
 				</div>
 				<div style="width: 100%; height:auto">
 					<perfect-scrollbar>
@@ -104,29 +104,34 @@
 						<table datatable [dtOptions]="dtOptions" class="table align-items-center">
 							<thead class="thead-light">
 								<tr role="row">
-									<th scope="col">ID</th>
+									<th scope="col">SN</th>
 									<th scope="col">Name</th>
-									<th scope="col">Address</th>
-									<th scope="col">Budget</th>
-									<th scope="col">Status</th>
+									<th scope="col">Email</th>
+									<th>Documents</th>
 									<th scope="row">Action</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngFor="let user of person" role="row">
-									<td>{{ user.Id }}</td>
-									<td>{{ user.Name }}</td>
-									<td>{{ user.Address }}</td>
-									<td> {{ user.Budget }} </td>
-									<td> {{ user.Status }} </td>
+								<tr *ngFor="let user of unRiders; let i = index" role="row">
+									<td>{{  i + 1  }}</td>
+									<td>{{ user.firstName }} {{ user.lastName }}</td>
+									<td>{{ user.email }}</td>
+									<td>
+										<div>
+											<img [src]="'https://pickmeup.com.ng/api/rider/' + user.ridersCard" alt="" style="width: 50px;height: 50px; margin: 10px" srcset="">
+											<img [src]="'https://pickmeup.com.ng/api/rider/' + user.stageCarriage" alt="" style="width: 50px;height: 50px; margin: 10px"  srcset="">
+											<img [src]="'https://pickmeup.com.ng/api/rider/' + user.vehicleLicense" alt="" style="width: 50px;height: 50px; margin: 10px"  srcset="">
+										</div>
+									</td>
 									<td>
 										<div class="btn-group" role="group" aria-label="Button group">
-											<a [routerLink]="['/riders', user.Id]" routerLinkActive="router-link-active"  class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title="View"><i
-													class="fa fa-eye"></i></a>
-											<button class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Verify"><i
-													class="fa fa-check"></i></button>
-											<button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete"> <i
-													class="fa fa-trash"></i> </button>
+											<a [routerLink]="[ user.riderId]" class="btn btn-info btn-sm" data-toggle="tooltip"
+												data-placement="top" title="View"><i class="fa fa-eye"></i></a>
+
+											<button class="btn btn-danger btn-sm" data-toggle="tooltip" (click)="close(user.riderId)"
+												data-placement="top"
+												title="Delete">
+												<i class="fa fa-trash"></i> </button>
 										</div>
 
 									</td>
@@ -166,5 +171,48 @@
 			</div>
 		</div>
 	</div>
-</div>
 
+	<div class="row mt-5">
+		<div class="col">
+			<div class="card shadow">
+				<div class="card-header border-0">
+					<h3 class="mb-0">Verified Riders Details</h3>
+				</div>
+				<div style="width: 100%; height:auto">
+					<perfect-scrollbar>
+						<!-- <div class="table-responsive"> -->
+						<table datatable [dtOptions]="dtOptions" class="table align-items-center">
+							<thead class="thead-light">
+								<tr role="row">
+									<th scope="col">SN</th>
+									<th scope="col">Name</th>
+									<th scope="col">Email</th>
+									<th scope="row">Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let user of vRiders; let i = index" role="row">
+									<td>{{ i + 1 }}</td>
+									<td>{{ user.firstName }} {{ user.lastName }}</td>
+									<td>{{ user.email }}</td>
+
+									<td>
+										<div class="btn-group" role="group" aria-label="Button group">
+											<a [routerLink]="[ user.riderId]" class="btn btn-info btn-sm" data-toggle="tooltip"
+												data-placement="top" title="View"><i class="fa fa-eye"></i></a>
+											<button class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Delete"
+												(click)="close(user.riderId)">
+												<i class="fa fa-trash"></i> </button>
+										</div>
+
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<!-- </div> -->
+					</perfect-scrollbar>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

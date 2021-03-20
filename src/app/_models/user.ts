@@ -6,4 +6,5 @@ export class User {
 	phone: number;
 	profilePic: string;
 	token?: string;
+	state: string;
 }

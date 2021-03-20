@@ -12,6 +12,9 @@ import { InboxComponent } from "../../pages/inbox/inbox.component";
 import { RidersComponent } from "../../pages/riders/riders.component";
 import { RequestDetailsComponent } from "../../pages/requests/request-details/request-details.component";
 import { RidersDetailsComponent } from "../../pages/riders/riders-details/riders-details.component";
+import { LocationComponent } from '../../pages/location/location.component';
+import { UsersComponent } from '../../pages/users/users.component';
+import { UserDetailsComponent } from '../../pages/users/user-details/user-details.component';
 
 export const AdminLayoutRoutes: Routes = [
 		{path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -27,4 +30,7 @@ export const AdminLayoutRoutes: Routes = [
 	{ path: "inbox", component: InboxComponent },
 	{ path: "riders", component: RidersComponent },
 	{ path: "riders/:id", component: RidersDetailsComponent },
+	{ path: 'location', component: LocationComponent },
+	{ path: 'users', component: UsersComponent },
+	{path: 'users/:id', component: UserDetailsComponent}
 ];

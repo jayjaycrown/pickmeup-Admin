@@ -16,12 +16,20 @@
 					<h3 class="mb-0">Rider Details</h3>
 				</div>
 				<div class="card-body">
+					<h3> {{ unRiders.firstName }} {{ unRiders.lastName }} </h3>
+					<h3> {{ unRiders.email }} </h3>
+					<h3>Documents</h3>
+					<div style="max-width: 100%;">
+						<img [src]="ridersCard" class="riderDocument" alt="" srcset="">
+						<img [src]="stageCarriage" class="riderDocument" alt="" srcset="">
+						<img [src]="vehicleLicense" class="riderDocument" alt="" srcset="">
+					</div>
 
 				</div>
 				<div class="card-footer">
 					<div class="float-right">
-						<button class="btn btn-danger btn-lg">Reject</button>
-						<button class="btn btn-success btn-lg">Accept</button>
+						<button class="btn btn-danger btn-lg" (click)="close(unRiders.riderId)">Reject</button>
+						<button class="btn btn-success btn-lg" (click)="accept(unRiders.riderId)">Accept</button>
 					</div>
 				</div>
 			</div>

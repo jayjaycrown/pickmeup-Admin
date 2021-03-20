@@ -45,9 +45,11 @@ export class AuthenticationService {
 
 	forgotPassword(email) {
 		return this.http
-			.post<any>(`${environment.apiUrl}/forgot-password.php`, {
-				email
-			}).pipe();
+			.post<any>(`${environment.apiUrl}/forgot-password.php`, email).pipe();
+	}
+	resetPassword(value) {
+		return this.http
+			.post<any>(`${environment.apiUrl}/forgot-password.php`, value).pipe();
 	}
 	logout() {
 		// remove user from local storage to log user out

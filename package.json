@@ -28,6 +28,7 @@
     "@ngx-loading-bar/core": "^5.1.1",
     "@ngx-loading-bar/http-client": "^5.1.1",
     "@ngx-loading-bar/router": "^5.1.1",
+    "@swimlane/ngx-datatable": "^19.0.0",
     "angular-datatables": "^11.1.1",
     "bootstrap": "4.5.2",
     "chart.js": "2.9.3",

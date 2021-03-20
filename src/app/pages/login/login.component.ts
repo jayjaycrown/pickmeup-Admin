@@ -11,7 +11,7 @@ import { AuthenticationService } from '../../_services/admin.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-	loginForm: FormGroup;
+		loginForm: FormGroup;
     loading = false;
     submitted = false;
     error = '';
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
 
 
 	onSubmit() {
-        this.submitted = true;
+    this.submitted = true;
 		console.log(this.f.value);
         // stop here if form is invalid
         if (this.loginForm.invalid) {
