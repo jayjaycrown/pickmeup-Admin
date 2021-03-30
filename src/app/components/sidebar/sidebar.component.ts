@@ -22,6 +22,30 @@ export const ROUTES: RouteInfo[] = [
 		icon: "ni-pin-3 text-custom",
 		class: "",
 	},
+	{
+		path: "interstate",
+		title: "Interstate Pricing",
+		icon: "ni-pin-3 text-custom",
+		class: "",
+	},
+	{
+		path: "interstateDelivery",
+		title: "Interstate Delivery",
+		icon: "ni-pin-3 text-custom",
+		class: "",
+	},
+	{
+		path: "international",
+		title: "International",
+		icon: "ni-pin-3 text-custom",
+		class: "",
+	},
+	// {
+	// 	path: "zones",
+	// 	title: "Zones",
+	// 	icon: "ni-pin-3 text-custom",
+	// 	class: "",
+	// },
 	// { path: 'icons', title: 'Icons',  icon: 'ni-planet text-custom', class: '' },
 	// { path: '/maps', title: 'Maps',  icon: 'ni-pin-3 text-orange', class: '' },
 	{

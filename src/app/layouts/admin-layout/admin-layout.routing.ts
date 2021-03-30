@@ -15,6 +15,10 @@ import { RidersDetailsComponent } from "../../pages/riders/riders-details/riders
 import { LocationComponent } from '../../pages/location/location.component';
 import { UsersComponent } from '../../pages/users/users.component';
 import { UserDetailsComponent } from '../../pages/users/user-details/user-details.component';
+import { ZonesComponent } from '../../pages/zones/zones.component';
+import { InterstateLocationComponent } from '../../pages/interstate-location/interstate-location.component';
+import { InternationalPricingComponent } from '../../pages/international-pricing/international-pricing.component';
+import { InterstateDeliveryComponent } from '../../pages/interstate-delivery/interstate-delivery.component';
 
 export const AdminLayoutRoutes: Routes = [
 		{path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -31,6 +35,10 @@ export const AdminLayoutRoutes: Routes = [
 	{ path: "riders", component: RidersComponent },
 	{ path: "riders/:id", component: RidersDetailsComponent },
 	{ path: 'location', component: LocationComponent },
+	{ path: 'location/:id', component: ZonesComponent },
 	{ path: 'users', component: UsersComponent },
-	{path: 'users/:id', component: UserDetailsComponent}
+	{ path: 'users/:id', component: UserDetailsComponent },
+	{ path: 'interstate', component: InterstateLocationComponent },
+	{ path: 'international', component: InternationalPricingComponent },
+	{ path: 'interstateDelivery', component: InterstateDeliveryComponent }
 ];

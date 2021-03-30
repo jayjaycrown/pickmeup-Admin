@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   public clicked = true;
 	public clicked1 = false;
 	adminDetails: any;
-	summary;
+	summary: any = {};
 	constructor(
 		private user: UserService
 	) {}

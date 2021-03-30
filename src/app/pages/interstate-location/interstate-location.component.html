@@ -1,0 +1,107 @@
+<div class="header bg-yellow pb-8 pt-5 pt-lg-8 d-flex align-items-center">
+	<!-- Mask -->
+	<!-- <span class="mask header-color"></span> -->
+	<!-- Header container -->
+	<div class="container-fluid d-flex align-items-center">
+		<div class="row">
+			<div class="col">
+				<!-- <h1 class="display-2 ">Hello Jesse</h1> -->
+				<!-- <p class=" mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p> -->
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid mt--7">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card shadow">
+				<div class="card-header border-0">
+					<div class="row">
+						<div class="col-12">
+							<h3 class="mb-0">Interstate Pricing</h3>
+						</div>
+						<!-- <div class="col-4 text-right">
+							<button class="btn btn-primary">Add State</button>
+						</div> -->
+					</div>
+
+				</div>
+				<div style="width: 100%; height:auto">
+					<!-- <perfect-scrollbar> -->
+					<div class="table-responsive">
+						<table datatable [dtOptions]="dtOptions" class="table align-items-center">
+							<thead class="thead-light">
+								<tr role="row">
+									<th scope="col">ID</th>
+									<th scope="col">Weight Range</th>
+									<th scope="col">Southwest Price</th>
+									<th scope="col">Other Price</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let state of prices; let i= index" role="row">
+									<td>{{ i + 1 }}</td>
+									<td>{{ state.weightRange }}</td>
+									<td>{{ state.southWestPrice }}</td>
+									<td>{{ state.othersPrice }}</td>
+									<td><button type="button" class="btn btn-clear btn-sm" (click)="openModal(template, state.id)">Edit Price</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- </perfect-scrollbar> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<ng-template #template>
+	<div class="modal-header">
+		<h4 class="modal-title pull-left">Create State</h4>
+		<button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<form name="form" #editForm="ngForm" (ngSubmit)="editForm.valid && editPrice(editForm.value)">
+		<div class="modal-body text-center">
+			<div class="row">
+				<div class="col-12">
+
+					<div class="input-group input-group-alternative mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text">SouthWest Price</span>
+						</div>
+						<input type="text" required autocomplete="off" name="southWestPrice" #southWestPrice="ngModel"
+							[(ngModel)]="model.southWestPrice" class="form-control"
+							[ngClass]="{ 'is-invalid': editForm.submitted && southWestPrice.invalid }" required />
+					</div>
+
+					<div class="input-group input-group-alternative mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Other Price</span>
+						</div>
+						<input type="text" required autocomplete="off" name="otherPrice" #otherPrice="ngModel"
+							[(ngModel)]="model.otherPrice" class="form-control"
+							[ngClass]="{ 'is-invalid': editForm.submitted && southWestPrice.invalid }" required />
+					</div>
+
+
+				</div>
+			</div>
+
+		</div>
+		<div class="modal-footer">
+			<button type="submit" [disabled]="!editForm.valid" class="btn btn-primary">
+				<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+				Submit
+			</button>
+			<button type="button" class="btn btn-light" (click)="decline()">Close</button>
+		</div>
+	</form>
+</ng-template>

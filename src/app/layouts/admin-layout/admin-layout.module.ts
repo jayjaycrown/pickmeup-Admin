@@ -28,6 +28,12 @@ import { RequestDetailsComponent } from "../../pages/requests/request-details/re
 import { LocationComponent } from '../../pages/location/location.component';
 import { UsersComponent } from '../../pages/users/users.component';
 import { UserDetailsComponent } from '../../pages/users/user-details/user-details.component';
+import { ZonesComponent } from '../../pages/zones/zones.component';
+import { InterstateLocationComponent } from '../../pages/interstate-location/interstate-location.component';
+import { InternationalPricingComponent } from '../../pages/international-pricing/international-pricing.component';
+import { InterstateDeliveryComponent } from '../../pages/interstate-delivery/interstate-delivery.component';
+
+
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -57,7 +63,11 @@ import { UserDetailsComponent } from '../../pages/users/user-details/user-detail
 		RidersDetailsComponent,
 		LocationComponent,
 		UsersComponent,
-		UserDetailsComponent
+		UserDetailsComponent,
+		ZonesComponent,
+		InterstateLocationComponent,
+		InternationalPricingComponent,
+		InterstateDeliveryComponent
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
 	public location: Location;
 	modalRef: BsModalRef;
 	message: string;
-	adminDetails: any;
+	adminDetails: any = {};
 	constructor(
 		location: Location,
 		private element: ElementRef,

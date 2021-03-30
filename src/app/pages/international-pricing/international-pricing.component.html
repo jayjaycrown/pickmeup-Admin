@@ -1,0 +1,219 @@
+<div class="header bg-yellow pb-8 pt-5 pt-lg-8 d-flex align-items-center">
+	<!-- Mask -->
+	<!-- <span class="mask header-color"></span> -->
+	<!-- Header container -->
+	<div class="container-fluid d-flex align-items-center">
+		<div class="row">
+			<div class="col">
+				<!-- <h1 class="display-2 ">Hello Jesse</h1> -->
+				<!-- <p class=" mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p> -->
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid mt--7">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="card shadow">
+						<div class="card-header border-0">
+							<h3>International Zones <span class="float-right">
+
+								</span></h3>
+						</div>
+						<ul class="list-unstyled">
+							<li *ngFor="let item of zones" style="border: 1px solid #eee; padding: 10px 20px">
+								<span>{{ item }}</span>
+								<span class="float-right">
+									<a class="btn btn-clear btn-sm" (click)="onClick(editPrice, item)">Edit Price</a>
+								</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card shadow">
+						<div class="card-header">
+							Add Zone
+						</div>
+						<div class="card-body">
+							<form name="form" #createForm="ngForm" (ngSubmit)="createForm.valid && addInter()">
+								<div class="input-group input-group-alternative mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text">Zone</span>
+									</div>
+									<input type="text" required autocomplete="off" name="zone" [(ngModel)]="model.zone" class="form-control"
+										[ngClass]="{ 'is-invalid': createForm.submitted}" required />
+								</div>
+								<div>
+									{{pricing|json}}
+
+								</div>
+								<div style="display: block;">
+									<a class="btn btn-primary btn-sm" (click)="openModal(template)">Add Price</a>
+								</div>
+								<button type="submit" class="btn btn-primary float-right">
+									<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+									Submit</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mt-5">
+				<div class="col-12">
+					<div class="card shadow">
+						<div class="card-header">
+							Add Country
+						</div>
+						<div class="card-body">
+							<form name="form" #addCountryForm="ngForm"
+								(ngSubmit)="addCountryForm.valid && addCountry()">
+								<div class="input-group input-group-alternative mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text">Zone</span>
+									</div>
+									<select class="form-control custom-select" autocomplete="off" name="zone" [(ngModel)]="countrymodel.zone"
+										class="form-control" required>
+										<option *ngFor="let item of zones" [value]="item">{{item}}</option>
+									</select>
+								</div>
+								<div class="input-group input-group-alternative mb-3">
+									<div class="input-group-prepend">
+										<span class="input-group-text">Name</span>
+									</div>
+									<input type="text" class="form-control" utocomplete="off" name="countryName"
+										[(ngModel)]="countrymodel.countryName"
+										class="form-control" required>
+
+								</div>
+								<button type="submit" [disabled]="!addCountryForm.valid" class="btn btn-primary">
+									<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+									Submit
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="card shadow">
+				<div class="card-header border-0">
+					<h3>Country List</h3>
+				</div>
+				<table class="table table-striped" datatable [dtOptions]="dtOptions">
+					<thead>
+						<tr>
+							<th>S/N</th>
+							<th>Country Name</th>
+							<th>Zone</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let country of countries let i=index">
+							<td> {{ i+1 }} </td>
+							<td>{{ country.countryName }}</td>
+							<td> {{ country.zone }} </td>
+							<td>
+								<button class="btn btn-clear text-danger btn-sm">
+									<i class="fa fa-trash text-danger"></i>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<!-- <ul class="list-unstyled">
+					<li *ngFor="let item of interWeight" style="border: 1px solid #eee; padding: 10px 20px">
+						{{ item.weightRange }}
+					</li>
+				</ul> -->
+			</div>
+		</div>
+	</div>
+</div>
+
+<ng-template #template>
+	<div class="modal-header">
+		<h4 class="modal-title pull-left">Add price</h4>
+		<button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<form name="form" #editForm="ngForm" (ngSubmit)="editForm.valid && addInterPrice(editForm.value)">
+		<div class="modal-body text-center">
+
+			<div *ngFor="let item of interWeight" class="row">
+				<div class="col-md-4">
+					<p>{{ item.weightRange }}</p>
+				</div>
+				<div class="col-md-8">
+					<div class="input-group input-group-alternative mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text">₦</span>
+						</div>
+						<input type="number" required autocomplete="off" name="{{item.id}}" [(ngModel)]="this[item.id]"
+						class="form-control" required />
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="modal-footer">
+			<button type="submit" [disabled]="!editForm.valid" class="btn btn-primary">
+				<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+				Submit
+			</button>
+			<button type="button" class="btn btn-light" (click)="decline()">Close</button>
+		</div>
+	</form>
+</ng-template>
+
+<ng-template #editPrice>
+	<div class="modal-header">
+		<h4 class="modal-title pull-left">Edit price for zone {{ myZone }}</h4>
+		<button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<form name="form" #editInterForm="ngForm" (ngSubmit)="editInterForm.valid && editInterPrice(editInterForm.value)">
+		<div class="modal-body text-center">
+
+			<div class="row">
+				<div class="col-md-6">
+					<div class="input-group input-group-alternative mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text">Range</span>
+						</div>
+						<select class="form-control custom-select" autocomplete="off" name="rangeId" [(ngModel)]="editmodel.rangeId"
+							class="form-control" required>
+							<option *ngFor="let item of interWeight" [value]="item.id">{{item.weightRange}}</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="input-group input-group-alternative mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text">₦</span>
+						</div>
+						<input type="number" class="form-control" autocomplete="off" name="price"
+							[(ngModel)]="editmodel.price" class="form-control" required>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="modal-footer">
+			<button type="submit" [disabled]="!editInterForm.valid" class="btn btn-primary">
+				<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+				Submit
+			</button>
+			<button type="button" class="btn btn-light" (click)="decline()">Close</button>
+		</div>
+	</form>
+</ng-template>

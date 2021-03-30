@@ -23,15 +23,18 @@ interface State {
   styleUrls: ['./location.component.css']
 })
 export class LocationComponent implements OnInit, OnDestroy {
-	 dtTrigger: Subject<any> = new Subject<any>();
+	dtTrigger: Subject<any> = new Subject<any>();
 
 	model: any = {};
+	areamodel: any = {};
 	modalRef: BsModalRef;
 	message: string;
 	dtOptions: DataTables.Settings = {};
 	loading = false;
 	states: any;
 	areas: any;
+	token: any;
+	stateZones: any;
 	constructor(
 		private element: ElementRef,
 		private router: Router,
@@ -40,6 +43,46 @@ export class LocationComponent implements OnInit, OnDestroy {
 		private alertService: AlertService
 	) { }
 
+		async ngOnInit() {
+
+		const user = await JSON.parse(localStorage.getItem("user"));
+
+		// console.log(user);
+		this.token = user.token;
+		// console.log(token);
+			this.model = { token: this.token };
+			this.areamodel = { token: this.token };
+		this.fetchState(this.token);
+		this.fetchArea(this.token);
+			// this.fetchStateZone(this.token);
+		// setTimeout(() => {
+		// 	this.fetchState(token);
+		// }, 5000);
+
+		this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5
+    };
+		}
+
+	setState() {
+		const data = {
+			stateId: this.areamodel.stateId,
+			token: this.token
+		};
+		// console.log(data);
+		this.user.fetchStateZones(data).subscribe((res: any) => {
+			console.log(res);
+			this.stateZones = res.zones;
+		});
+	}
+
+	// fetchStateZone(token) {
+	// 	this.user.fetchStateZones(token).subscribe((res: any) => {
+	// 		console.log(res);
+	// 		this.stateZones = res.zones;
+	// 	});
+	// }
 	fetchState(token) {
 		this.user.fetchState(token).subscribe((res: any) => {
 			console.log(res);
@@ -72,25 +115,7 @@ export class LocationComponent implements OnInit, OnDestroy {
 			// }
 		});
 	}
-	async ngOnInit() {
 
-		const user = await JSON.parse(localStorage.getItem("user"));
-
-		// console.log(user);
-		const token = user.token;
-		// console.log(token);
-		this.model = { token: token };
-		this.fetchState(token);
-		this.fetchArea(token);
-		// setTimeout(() => {
-		// 	this.fetchState(token);
-		// }, 5000);
-
-		this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 5
-    };
-	}
 
 	openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
@@ -111,22 +136,55 @@ export class LocationComponent implements OnInit, OnDestroy {
 
 	onSubmit() {
 		this.loading = true;
-		console.log(this.model);
-		this.user.createArea(this.model).subscribe((res: any) => {
+		console.log(this.areamodel);
+		if (!this.areas.some((item) => item.areaName === this.areamodel.areaName)) {
+			this.user.createArea(this.areamodel).subscribe((res: any) => {
 			this.loading = false;
 			if (res.success  === true) {
+				this.alertService.success(res.message);
+				this.decline();
+				this.fetchArea(this.token);
+				// this.fetchArea(this.token);
+			} else {
+				this.alertService.danger(res.message);
+			}
+		});
+
+		} else {
+			this.alertService.danger('Area Already exists');
+			this.loading = false;
+		}
+			}
+	createNewState() {
+		this.loading = true;
+		console.log(this.model);
+		if (!this.states.some((item) => item.stateName === this.model.stateName.toLowerCase())) {
+			this.user.createState(this.model).subscribe((res: any) => {
+			this.loading = false;
+				if (res.success === true) {
+				this.fetchState(this.token);
 				this.alertService.success(res.message);
 				this.decline();
 			} else {
 				this.alertService.danger(res.message);
 			}
 		});
+
+		} else {
+			this.alertService.danger('STATE ALREADY EXIST');
+			this.loading = false;
+		}
 	}
 
 	// tslint:disable-next-line: use-life-cycle-interface
 	ngOnDestroy(): void {
     // Do not forget to unsubscribe the event
     this.dtTrigger.unsubscribe();
-  }
+	}
+
+
+	viewZones(stateID) {
+		this.router.navigateByUrl('/app/home/location/' + stateID);
+	}
 
 }

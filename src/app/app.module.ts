@@ -28,6 +28,7 @@ import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AlertModule } from '@full-fledged/alerts';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+// import { InterstateDeliveryComponent } from './pages/interstate-delivery/interstate-delivery.component';
 // import { RequestDetailsComponent } from './pages/requests/request-details/request-details.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -59,6 +60,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		AppComponent,
 		AdminLayoutComponent,
 		AuthLayoutComponent,
+		// InterstateDeliveryComponent,
 		// RequestDetailsComponent,
 	],
 	providers: [

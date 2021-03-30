@@ -34,7 +34,16 @@ export class UserService {
 	}
 
 	createArea(data) {
-		return  this.http.post<any>(`${environment.apiUrl}/create-state.php`, data)
+		return  this.http.post<any>(`${environment.apiUrl}/create-area.php`, data)
+			.pipe();
+	}
+
+	fetchStateZones(data) {
+			return  this.http.post<any>(`${environment.apiUrl}/fetch-state-zones.php`, data)
+			.pipe();
+	}
+	createStateZone(data) {
+		return  this.http.post<any>(`${environment.apiUrl}/create-state-zone.php`, data)
 			.pipe();
 	}
 	fetchSummary(token) {
@@ -44,8 +53,65 @@ export class UserService {
 			.pipe();
 	}
 
+	fetchInterstate(token) {
+		return  this.http.post<any>(`${environment.apiUrl}/fetch-interstate-pricing.php`, {
+				token
+			})
+			.pipe();
+	}
+
+	editInterstate(data) {
+		return  this.http.post<any>(`${environment.apiUrl}/edit-interstate-pricing.php`, data)
+			.pipe();
+	}
+
+	fetchInternational(token) {
+		return  this.http.post<any>(`${environment.apiUrl}/fetch-international-zones.php`, {
+				token
+			})
+			.pipe();
+	}
+
+	fetchInternationalWeight(token) {
+		return  this.http.post<any>(`${environment.apiUrl}/fetch-international-weights.php`, {
+				token
+			})
+			.pipe();
+	}
+	createInternationalPricing(data) {
+		return this.http.post<any>(`${environment.apiUrl}/create-international-zone.php`, data)
+			.pipe();
+	}
+
+	editInternationalPricing(data) {
+		return this.http.post<any>(`${environment.apiUrl}/edit-international-pricing.php`, data)
+			.pipe();
+	}
+
+	createCountry(data) {
+		return this.http.post<any>(`${environment.apiUrl}/create-country.php`, data)
+			.pipe();
+	}
+	fetchCountry(token) {
+		return  this.http.post<any>(`${environment.apiUrl}/fetch-countries.php`, {
+				token
+			})
+			.pipe();
+	}
+
+	officeInterstateDeliveries(token) {
+		return  this.http.post<any>(`${environment.apiUrl}/fetch-office-interstate-deliveries.php`, {
+				token
+			})
+			.pipe();
+	}
+	addDHLToTracking(data) {
+		return  this.http.post<any>(`${environment.apiUrl}/add-dhl-to-interstate-delivery.php`, data)
+			.pipe();
+	}
+
 	fetchUnverifiedRiders(token) {
-		return  this.http.post<any>(`${environment.apiUrl}/fetch-unverified-riders.php`, {token})
+		return this.http.post<any>(`${environment.apiUrl}/fetch-unverified-riders.php`, {token})
 			.pipe();
 	}
 
