@@ -28,11 +28,21 @@ export class InternationalPricingComponent implements OnInit {
 	price: any = {};
 	myZone: any;
 	countries: any;
+	p = 1;
+	key = 'id';
+	reverse = false;
+	newcountries: any;
+	countryName: string;
 	constructor(
 		private user: UserService,
 		private modalService: BsModalService,
 		private alertService: AlertService
 	) { }
+
+	sort(key) {
+		this.key = key;
+		this.reverse = !this.reverse;
+	}
 
 	async ngOnInit(): Promise<void> {
 		this.dtOptions = {
@@ -63,7 +73,8 @@ export class InternationalPricingComponent implements OnInit {
 	fetchCountries(token) {
 		this.user.fetchCountry(token).subscribe((res: any) => {
 
-				this.countries = res.countries;
+			this.countries = res.countries;
+			this.newcountries = this.countries;
 		});
 	}
 
@@ -154,6 +165,19 @@ export class InternationalPricingComponent implements OnInit {
 				console.error(err);
 		});
 
+	}
+
+
+	search() {
+		this.newcountries = this.countries;
+		if (this.countryName === '') {
+			this.newcountries = this.countries;
+			// this.ngOnInit();
+		} else {
+			this.newcountries = this.newcountries.filter(res => {
+				return res.countryName.toLowerCase().match(this.countryName.toLowerCase());
+			});
+		}
 	}
 }
 

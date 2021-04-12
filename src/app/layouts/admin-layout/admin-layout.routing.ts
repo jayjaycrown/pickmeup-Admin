@@ -19,6 +19,8 @@ import { ZonesComponent } from '../../pages/zones/zones.component';
 import { InterstateLocationComponent } from '../../pages/interstate-location/interstate-location.component';
 import { InternationalPricingComponent } from '../../pages/international-pricing/international-pricing.component';
 import { InterstateDeliveryComponent } from '../../pages/interstate-delivery/interstate-delivery.component';
+import { InternationalDeliveryComponent } from '../../pages/international-delivery/international-delivery.component';
+import { AssignComponent } from '../../pages/assign/assign.component';
 
 export const AdminLayoutRoutes: Routes = [
 		{path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -40,5 +42,7 @@ export const AdminLayoutRoutes: Routes = [
 	{ path: 'users/:id', component: UserDetailsComponent },
 	{ path: 'interstate', component: InterstateLocationComponent },
 	{ path: 'international', component: InternationalPricingComponent },
-	{ path: 'interstateDelivery', component: InterstateDeliveryComponent }
+	{ path: 'interstateDelivery', component: InterstateDeliveryComponent },
+	{ path: 'internationalDelivery', component: InternationalDeliveryComponent },
+	{ path: 'assign', component: AssignComponent }
 ];

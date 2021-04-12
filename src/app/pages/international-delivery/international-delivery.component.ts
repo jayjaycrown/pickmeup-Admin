@@ -4,14 +4,13 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 import { NgForm } from "@angular/forms";
 import { AlertService } from '@full-fledged/alerts';
-
 @Component({
-  selector: 'app-interstate-delivery',
-  templateUrl: './interstate-delivery.component.html',
-  styleUrls: ['./interstate-delivery.component.css']
+  selector: 'app-international-delivery',
+  templateUrl: './international-delivery.component.html',
+  styleUrls: ['./international-delivery.component.css']
 })
-export class InterstateDeliveryComponent implements OnInit {
-	dtOptions: DataTables.Settings = {};
+export class InternationalDeliveryComponent implements OnInit {
+dtOptions: DataTables.Settings = {};
 	token: any;
 	deliveries: any;
 	message: string;
@@ -25,7 +24,7 @@ export class InterstateDeliveryComponent implements OnInit {
 		private alertService: AlertService
 	) { }
 
-	async ngOnInit(): Promise<void> {
+		async ngOnInit(): Promise<void> {
 			this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5
@@ -38,7 +37,7 @@ export class InterstateDeliveryComponent implements OnInit {
 	}
 
 	fetchOfficeDeliveries(token) {
-		this.user.fetchInterstateRequests(token).subscribe((res: any) => {
+		this.user.fetchInternationalRequests(token).subscribe((res: any) => {
 			console.log(res);
 			this.deliveries = res.deliveries;
 		}, err => {
@@ -64,7 +63,7 @@ export class InterstateDeliveryComponent implements OnInit {
 			dhlTrackingNumber: this.model.dhlTrackingNumber
 		};
 		console.log(obj);
-		this.user.addDHLToTracking(obj).subscribe((res: any) => {
+		this.user.addDHLToTrackingInternational(obj).subscribe((res: any) => {
 			this.loading = false;
 			if (res.success === true) {
 				this.alertService.success(res.message);
@@ -79,4 +78,5 @@ export class InterstateDeliveryComponent implements OnInit {
 			console.error(err);
 		});
 	}
+
 }

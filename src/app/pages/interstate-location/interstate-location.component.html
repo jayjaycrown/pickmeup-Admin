@@ -19,31 +19,34 @@
 			<div class="card shadow">
 				<div class="card-header border-0">
 					<div class="row">
-						<div class="col-12">
+						<div class="col-md-9">
 							<h3 class="mb-0">Interstate Pricing</h3>
 						</div>
-						<!-- <div class="col-4 text-right">
-							<button class="btn btn-primary">Add State</button>
-						</div> -->
+						<div class="col-md-3">
+							<div class="input-group-sm">
+								<input type="text" class="form-control input-sm" name="southWestPrice" [(ngModel)]="southWestPrice" (ngModelChange)="search()">
+							</div>
+						</div>
 					</div>
 
 				</div>
 				<div style="width: 100%; height:auto">
 					<!-- <perfect-scrollbar> -->
 					<div class="table-responsive">
-						<table datatable [dtOptions]="dtOptions" class="table align-items-center">
-							<thead class="thead-light">
+						<table class="table align-items-center">
+							<thead class="thead-light" style="cursor: pointer;">
 								<tr role="row">
-									<th scope="col">ID</th>
-									<th scope="col">Weight Range</th>
-									<th scope="col">Southwest Price</th>
-									<th scope="col">Other Price</th>
+									<!-- <th scope="col">ID</th> -->
+									<th scope="col" (click)="sort('weightRange')">Weight Range &nbsp; <i class="fa fa-sort"></i></th>
+									<th scope="col" (click)="sort('southWestPrice')">Southwest Price &nbsp; <i class="fa fa-sort"></i></th>
+									<th scope="col" (click)="sort('othersPrice')">Other Price &nbsp; <i class="fa fa-sort"></i></th>
 									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngFor="let state of prices; let i= index" role="row">
-									<td>{{ i + 1 }}</td>
+								<tr *ngFor="let state of newPrice | orderBy: key: reverse | paginate: { itemsPerPage: 5, currentPage: p }"
+									role="row">
+									<!-- <td>{{ i + 1 }}</td> -->
 									<td>{{ state.weightRange }}</td>
 									<td>{{ state.southWestPrice }}</td>
 									<td>{{ state.othersPrice }}</td>
@@ -51,6 +54,7 @@
 									</td>
 								</tr>
 							</tbody>
+							<pagination-controls (pageChange)="p = $event"></pagination-controls>
 						</table>
 					</div>
 					<!-- </perfect-scrollbar> -->

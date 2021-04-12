@@ -20,12 +20,21 @@ export class InterstateLocationComponent implements OnInit {
 	model: any = {};
 	loading = false;
 	message: string;
-
+	southWestPrice: any;
+	newPrice: any;
+	key = 'id';
+	reverse = false;
+	p = 1;
 	constructor(
 		private user: UserService,
 		private modalService: BsModalService,
 		private alertService: AlertService
 	) { }
+
+	sort(key) {
+		this.key = key;
+		this.reverse = !this.reverse;
+	}
 
 	async ngOnInit(): Promise<void> {
 		this.dtOptions = {
@@ -45,6 +54,7 @@ export class InterstateLocationComponent implements OnInit {
 		this.user.fetchInterstate(token).subscribe((res: any) => {
 			console.log(res);
 			this.prices = res.prices;
+			this.newPrice = this.prices;
 		});
 	}
 
@@ -81,6 +91,18 @@ export class InterstateLocationComponent implements OnInit {
 	openModal(template: TemplateRef<any>, id) {
 		this.interId = id;
     this.modalRef = this.modalService.show(template);
+	}
+
+	search() {
+		this.newPrice = this.prices;
+		if (this.southWestPrice === '') {
+			this.newPrice = this.prices;
+			// this.ngOnInit();
+		} else {
+			this.newPrice = this.newPrice.filter(res => {
+				return res.southWestPrice.match(this.southWestPrice);
+			});
+		}
 	}
 
 }

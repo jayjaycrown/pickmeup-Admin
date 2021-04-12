@@ -30,13 +30,19 @@ export const ROUTES: RouteInfo[] = [
 	},
 	{
 		path: "interstateDelivery",
-		title: "Interstate Delivery",
+		title: "Interstate Tracking",
 		icon: "ni-pin-3 text-custom",
 		class: "",
 	},
 	{
 		path: "international",
-		title: "International",
+		title: "International Pricing",
+		icon: "ni-pin-3 text-custom",
+		class: "",
+	},
+	{
+		path: "internationalDelivery",
+		title: "International tracking",
 		icon: "ni-pin-3 text-custom",
 		class: "",
 	},
@@ -62,7 +68,7 @@ export const ROUTES: RouteInfo[] = [
 		class: "",
 	},
 	{
-		path: "requests",
+		path: "assign",
 		title: "Requests",
 		icon: "ni-circle-08 text-custom",
 		class: "",

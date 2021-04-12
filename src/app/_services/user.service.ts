@@ -110,6 +110,18 @@ export class UserService {
 			.pipe();
 	}
 
+
+
+		officeInternationalDeliveries(token) {
+		return  this.http.post<any>(`${environment.apiUrl}/fetch-office-international-deliveries.php`, {
+				token
+			})
+			.pipe();
+	}
+	addDHLToTrackingInternational(data) {
+		return  this.http.post<any>(`${environment.apiUrl}/add-dhl-to-international-delivery.php`, data)
+			.pipe();
+	}
 	fetchUnverifiedRiders(token) {
 		return this.http.post<any>(`${environment.apiUrl}/fetch-unverified-riders.php`, {token})
 			.pipe();
@@ -132,6 +144,43 @@ export class UserService {
 
 	fetchUsers(token) {
 		return  this.http.post<any>(`${environment.apiUrl}/fetch-users.php`, {token})
+			.pipe();
+	}
+
+	fetchRequestDetails(token) {
+		return  this.http.post<any>(`${environment.apiUrl}/fetch-unassigned-deliveries.php`, {token})
+			.pipe();
+	}
+	fetchAvailableRiders(token) {
+		return  this.http.post<any>(`${environment.apiUrl}/fetch-available-riders.php`, {token})
+			.pipe();
+  }
+  assignRider(data) {
+		return  this.http.post<any>(`${environment.apiUrl}/assign-rider.php`, data)
+			.pipe();
+	}
+
+	fetchInterstateRequests(token) {
+		return  this.http.post<any>(`${environment.apiUrl}/fetch-interstate-requests.php`, {token})
+			.pipe();
+	}
+
+	fetchInternationalRequests(token) {
+		return  this.http.post<any>(`${environment.apiUrl}/fetch-international-requests.php`, {token})
+			.pipe();
+	}
+
+	fetchAssignedDeliveries(token) {
+		return  this.http.post<any>(`${environment.apiUrl}/fetch-assigned-deliveries.php`, {token})
+			.pipe();
+	}
+	fetchCompletedDeliveries(token) {
+		return  this.http.post<any>(`${environment.apiUrl}/fetch-completed-deliveries.php`, {token})
+			.pipe();
+	}
+
+	fetchPickedUpDeliveries(token) {
+		return  this.http.post<any>(`${environment.apiUrl}/fetch-pickedup-deliveries.php`, {token})
 			.pipe();
 	}
 }

@@ -1,0 +1,401 @@
+<div class="header bg-yellow pb-8 pt-5 pt-md-8">
+	<div class="container-fluid ">
+		<div class="header-body">
+			<div class="row mb-5">
+				<div class="col-xl-3 col-lg-6">
+					<div class="card card-stats mb-4 mb-xl-0">
+						<div class="card-body">
+							<div class="row">
+								<div class="col">
+									<h5 class="card-title text-uppercase text-muted mb-0">Total</h5>
+									<span class="h2 font-weight-bold mb-0">350,897</span>
+								</div>
+								<div class="col-auto">
+									<div class="icon icon-shape bg-primary text-white rounded-circle shadow">
+										<i class="fas fa-chart-bar"></i>
+									</div>
+								</div>
+							</div>
+							<p class="mt-3 mb-0 text-muted text-sm">
+								<span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+								<span class="text-nowrap">Since last month</span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-6">
+					<div class="card card-stats mb-4 mb-xl-0">
+						<div class="card-body">
+							<div class="row">
+								<div class="col">
+									<h5 class="card-title text-uppercase text-muted mb-0">Pending</h5>
+									<span class="h2 font-weight-bold mb-0">2,356</span>
+								</div>
+								<div class="col-auto">
+									<div class="icon icon-shape bg-primary text-white rounded-circle shadow">
+										<i class="fas fa-chart-pie"></i>
+									</div>
+								</div>
+							</div>
+							<p class="mt-3 mb-0 text-muted text-sm">
+								<span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>
+								<span class="text-nowrap">Since last week</span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-6">
+					<div class="card card-stats mb-4 mb-xl-0">
+						<div class="card-body">
+							<div class="row">
+								<div class="col">
+									<h5 class="card-title text-uppercase text-muted mb-0">Assigned</h5>
+									<span class="h2 font-weight-bold mb-0">924</span>
+								</div>
+								<div class="col-auto">
+									<div class="icon icon-shape bg-primary text-white rounded-circle shadow">
+										<i class="fas fa-users"></i>
+									</div>
+								</div>
+							</div>
+							<p class="mt-3 mb-0 text-muted text-sm">
+								<span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
+								<span class="text-nowrap">Since yesterday</span>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-6">
+					<div class="card card-stats mb-4 mb-xl-0">
+						<div class="card-body">
+							<div class="row">
+								<div class="col">
+									<h5 class="card-title text-uppercase text-muted mb-0">Completed</h5>
+									<span class="h2 font-weight-bold mb-0">49,65%</span>
+								</div>
+								<div class="col-auto">
+									<div class="icon icon-shape bg-primary text-white rounded-circle shadow">
+										<i class="fas fa-percent"></i>
+									</div>
+								</div>
+							</div>
+							<p class="mt-3 mb-0 text-muted text-sm">
+								<span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
+								<span class="text-nowrap">Since last month</span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mb-5">
+				<div class="col-sm-3">
+					<div class="card" style="cursor: pointer;" (click)="unAssigned()">
+						<div class="card-body text-center">
+							<h3>Unassigned Requests</h3>
+							<h3> {{ unassignedLength }} </h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="card" style="cursor: pointer;" (click)="Assigned()">
+						<div class="card-body text-center">
+							<h3>Assigned Requests</h3>
+							<h3> {{ assignedLength }} </h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="card" style="cursor: pointer;" (click)="PickedUp()">
+						<div class="card-body text-center">
+							<h3>Picked Up Requests</h3>
+							<h3> {{ pickedUpLength }} </h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="card" style="cursor: pointer;" (click)="Completed()">
+						<div class="card-body text-center">
+							<h3>Completed Requests</h3>
+							<h3> {{ completedLength }} </h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid mt--7">
+
+	<div class="row" *ngIf="unassigned">
+		<div class="col-12">
+			<div class="card shadow">
+				<div class="card-header">
+					Unassigned Requests
+				</div>
+					<div class="table-responsive">
+						<table class="table">
+							<thead class="thead-light" style="cursor: pointer;">
+								<tr>
+									<th (click)="sort1('senderName')">Sender Name &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort1('pickupAddress')">Pickup Address &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort1('senderPhone')">Sender Phone &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort1('receiverName')">Receiver Name &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort1('dropoffAddress')">Dropoff Address &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort1('receiverPhone')">Receiver Phone &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort1('price')">Price &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort1('type')">Type &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort1('paymentMethod')">Payment Mode &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort1('isPaid')">Payment Status &nbsp; <i class="fa fa-sort"></i></th>
+									<th>Assign Rider</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let item of deliveries| orderBy: key1: reverse1 | paginate: { itemsPerPage: 10, currentPage: q }">
+									<td> {{ item.senderName }} </td>
+									<td>{{ item.pickupAddress }}, {{ item.pickupArea }}</td>
+									<td>{{ item.senderPhone }}</td>
+									<td>{{ item.receiverName }}</td>
+									<td>{{ item.dropoffAddress }}, {{ item.dropoffArea }}</td>
+									<td>{{ item.receiverPhone }}</td>
+									<td>{{ item.price }}</td>
+									<td>{{ item.type }}</td>
+									<td>{{ item.paymentMethod }}</td>
+									<!-- <td>{{ item.senderName }}</td> -->
+									<td>{{ item.isPaid }}</td>
+									<td><button class="btn btn-sm btn-clear"
+											(click)="openModal(template, item.reference, item.pickupAddress, item.pickupArea, item.type)">
+										<i class="fa fa-plus-circle fa-2x"></i>
+									</button></td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="col-12 text-right">
+							<pagination-controls (pageChange)="q = $event"></pagination-controls>
+						</div>
+					</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="row" *ngIf="assigned">
+		<div class="col-12">
+			<div class="card shadow">
+				<div class="card-header">
+					Assigned Requests
+				</div>
+				<div class="table-responsive">
+					<table class="table">
+						<thead class="thead-light" style="cursor: pointer;">
+							<tr>
+								<th (click)="sort2('senderName')">Sender Name &nbsp; <i class="fa fa-sort"></i></th>
+								<th (click)="sort2('pickupAddress')">Pickup Address &nbsp; <i class="fa fa-sort"></i></th>
+								<th (click)="sort2('senderPhone')">Sender Phone &nbsp; <i class="fa fa-sort"></i></th>
+								<th (click)="sort2('receiverName')">Receiver Name &nbsp; <i class="fa fa-sort"></i></th>
+								<th (click)="sort2('dropoffAddress')">Dropoff Address &nbsp; <i class="fa fa-sort"></i></th>
+								<th (click)="sort2('receiverPhone')">Receiver Phone &nbsp; <i class="fa fa-sort"></i></th>
+								<th (click)="sort2('price')">Price &nbsp; <i class="fa fa-sort"></i></th>
+								<th (click)="sort2('type')">Type &nbsp; <i class="fa fa-sort"></i></th>
+								<th (click)="sort2('paymentMethod')">Payment Mode &nbsp; <i class="fa fa-sort"></i></th>
+								<th (click)="sort2('isPaid')">Payment Status &nbsp; <i class="fa fa-sort"></i></th>
+								<th (click)="sort2('assignedRiderName')">Assigned Rider &nbsp; <i class="fa fa-sort"></i></th>
+								<!-- <th>Status</th> -->
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr
+								*ngFor="let item of assignedDeliveries| orderBy: key2: reverse2 | paginate: { itemsPerPage: 10, currentPage: r
+								}">
+								<td> {{ item.senderName }} </td>
+								<td>{{ item.pickupAddress }}, {{ item.pickupArea }}</td>
+								<td>{{ item.senderPhone }}</td>
+								<td>{{ item.receiverName }}</td>
+								<td>{{ item.dropoffAddress }}, {{ item.dropoffArea }} </td>
+								<td>{{ item.receiverPhone }}</td>
+								<td>{{ item.price }}</td>
+								<td>{{ item.type }}</td>
+								<td>{{ item.paymentMethod }}</td>
+								<td>{{ item.isPaid }}</td>
+								<td>{{ item.assignedRiderName }}</td>
+
+								<!-- <td><button class="btn btn-sm btn-clear"
+										(click)="openModal(template, item.reference, item.pickupAddress, item.pickupArea, item.type)">
+										<i class="fa fa-plus-circle fa-2x"></i>
+									</button></td> -->
+							</tr>
+						</tbody>
+					</table>
+					<div class="col-12 text-right">
+						<pagination-controls (pageChange)="r = $event"></pagination-controls>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+		<div class="row" *ngIf="pickedUp">
+			<div class="col-12">
+				<div class="card shadow">
+					<div class="card-header">
+						Picked up Requests
+					</div>
+					<div class="table-responsive">
+						<table class="table">
+							<thead class="thead-light" style="cursor: pointer;">
+								<tr>
+									<th (click)="sort3('senderName')">Sender Name &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort3('pickupAddress')">Pickup Address &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort3('senderPhone')">Sender Phone &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort3('receiverName')">Receiver Name &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort3('dropoffAddress')">Dropoff Address &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort3('receiverPhone')">Receiver Phone &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort3('price')">Price &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort3('type')">Type &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort3('paymentMethod')">Payment Mode &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort3('isPaid')">Payment Status &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort3('assignedRiderName')">Assigned Rider &nbsp; <i class="fa fa-sort"></i></th>
+									<!-- <th>Assign Rider</th> -->
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr
+									*ngFor="let item of pickedupDeliveries| orderBy: key3: reverse3 | paginate: { itemsPerPage: 10, currentPage: s
+									}">
+									<td> {{ item.senderName }} </td>
+									<td>{{ item.pickupAddress }}, {{ item.pickupArea }}</td>
+									<td>{{ item.senderPhone }}</td>
+									<td>{{ item.receiverName }}</td>
+									<td>{{ item.dropoffAddress }}, {{ item.dropoffArea }}</td>
+									<td>{{ item.receiverPhone }}</td>
+									<td>{{ item.price }}</td>
+									<td>{{ item.type }}</td>
+									<td>{{ item.paymentMethod }}</td>
+										<td>{{ item.isPaid }}</td>
+									<td>{{ item.assignedRiderName }}</td>
+
+									<!-- <td><button class="btn btn-sm btn-clear"
+											(click)="openModal(template, item.reference, item.pickupAddress, item.pickupArea, item.type)">
+											<i class="fa fa-plus-circle fa-2x"></i>
+										</button></td> -->
+								</tr>
+							</tbody>
+						</table>
+						<div class="col-12 text-right">
+							<pagination-controls (pageChange)="s = $event"></pagination-controls>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row" *ngIf="completed">
+			<div class="col-12">
+				<div class="card shadow">
+					<div class="card-header">
+						Completed up Requests
+					</div>
+					<div class="table-responsive">
+						<table class="table">
+							<thead class="thead-light" style="cursor: pointer;">
+								<tr>
+									<th (click)="sort4('senderName')">Sender Name &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort4('pickupAddress')">Pickup Address &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort4('senderPhone')">Sender Phone &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort4('receiverName')">Receiver Name &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort4('dropoffAddress')">Dropoff Address &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort4('receiverPhone')">Receiver Phone &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort4('price')">Price &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort4('type')">Type &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort4('paymentMethod')">Payment Mode &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort4('isPaid')">Payment Status &nbsp; <i class="fa fa-sort"></i></th>
+									<th (click)="sort4('assignedRiderName')">Assigned Rider &nbsp; <i class="fa fa-sort"></i></th>
+									<!-- <th>Assign Rider</th> -->
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr
+									*ngFor="let item of completedDeliveries| orderBy: key4: reverse4 | paginate: { itemsPerPage: 10, currentPage: t
+									}">
+									<td> {{ item.senderName }} </td>
+									<td>{{ item.pickupAddress }}, {{ item.pickupAres }}</td>
+									<td>{{ item.senderPhone }}</td>
+									<td>{{ item.receiverName }}</td>
+									<td>{{ item.dropoffAddress }}, {{ item.dropoffArea }}</td>
+									<td>{{ item.receiverPhone }}</td>
+									<td>{{ item.price }}</td>
+									<td>{{ item.type }}</td>
+									<td>{{ item.paymentMethod }}</td>
+									<td>{{ item.isPaid }}</td>
+									<td>{{ item.assignedRiderName }}</td>
+
+									<!-- <td> {{ item.assignedRiderName }} </td> -->
+									<!-- <td><button class="btn btn-sm btn-clear"
+											(click)="openModal(template, item.reference, item.pickupAddress, item.pickupArea, item.type)">
+											<i class="fa fa-plus-circle fa-2x"></i>
+										</button></td> -->
+								</tr>
+							</tbody>
+						</table>
+						<div class="col-12 text-right">
+							<pagination-controls (pageChange)="t = $event"></pagination-controls>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+
+<ng-template #template>
+	<div class="modal-header">
+		<h4 class="modal-title pull-left">Assign A Rider</h4>
+		<button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<div class="row">
+			<div class="col-12">
+				<p>Pick Up Location : {{ newpickupAddress }}</p>
+			</div>
+			<div class="col-12">
+				<p>Drivers Location</p>
+				<div class="table-responsive">
+					<table class="table">
+						<thead class="thead-light" style="cursor: pointer;">
+							<th (click)="sort('firstName')">Name &nbsp; <i class="fa fa-sort"></i></th>
+							<th (click)="sort('location')">Address &nbsp; <i class="fa fa-sort"></i></th>
+							<th (click)="sort('distance')">Distance From Pickup &nbsp; <i class="fa fa-sort"></i></th>
+							<th>Action</th>
+						</thead>
+						<tbody>
+							<tr *ngFor="let item of driver| orderBy: key: reverse | paginate: { itemsPerPage: 5, currentPage: p }">
+								<td> {{ item.firstName  }} {{ item.lastName }} </td>
+								<td > {{ item?.location }} </td>
+								<td> {{ item?.distance }} </td>
+								<td> <button class="btn btn-sm btn-primary" (click)="assignRider(item.riderId)">Assign</button> </td>
+							</tr>
+						</tbody>
+
+					</table>
+					<div class="col-12 text-right">
+
+						<pagination-controls (pageChange)="p = $event"></pagination-controls>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+	<div class="modal-footer">
+
+	</div>
+</ng-template>

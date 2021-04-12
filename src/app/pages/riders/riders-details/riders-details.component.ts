@@ -10,13 +10,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class RidersDetailsComponent implements OnInit {
 
-		unRiders: any;
+		unRiders: any = {};
 	unVerifiedRiders: any;
 	id;
 	ridersCard;
 	vehicleLicense;
 	stageCarriage;
 	token: any;
+	riderType = '';
 	constructor(
 		private user: UserService,
 		private alertService: AlertService,
@@ -31,7 +32,7 @@ export class RidersDetailsComponent implements OnInit {
 		const user = await JSON.parse(localStorage.getItem("user"));
 		this.token = user.token;
 		this.fetchUnverifiedRiders(this.token);
-		this.fetchVerifiedRiders(this.token);
+		// this.fetchVerifiedRiders(this.token);
 	}
 	fetchUnverifiedRiders(token) {
 		this.user.fetchUnverifiedRiders(token).subscribe((res: any) => {
@@ -54,44 +55,35 @@ export class RidersDetailsComponent implements OnInit {
 		});
 	}
 
-	fetchVerifiedRiders(token) {
-		this.user.fetchVerifiedRiders(token).subscribe((res: any) => {
-			this.unVerifiedRiders = res.riders;
-			// console.log(res);
-			for (let i = 0; i < res.riders.length; i++) {
-				if (res.riders[i].riderId === this.id) {
-					this.unRiders = this.unVerifiedRiders[i];
-					this.stageCarriage = `https://pickmeup.com.ng/api/rider/${this.unRiders.stageCarriage}`;
-					this.vehicleLicense = `https://pickmeup.com.ng/api/rider/${this.unRiders.vehicleLicense}`;
-					this.ridersCard = `https://pickmeup.com.ng/api/rider/${this.unRiders.ridersCard}`;
-					// this.unRiders.push(element);
-				}
+	// fetchVerifiedRiders(token) {
+	// 	this.user.fetchVerifiedRiders(token).subscribe((res: any) => {
+	// 		this.unVerifiedRiders = res.riders;
+	// 		// console.log(res);
+	// 		for (let i = 0; i < res.riders.length; i++) {
+	// 			if (res.riders[i].riderId === this.id) {
+	// 				this.unRiders = this.unVerifiedRiders[i];
+	// 				this.stageCarriage = `https://pickmeup.com.ng/api/rider/${this.unRiders.stageCarriage}`;
+	// 				this.vehicleLicense = `https://pickmeup.com.ng/api/rider/${this.unRiders.vehicleLicense}`;
+	// 				this.ridersCard = `https://pickmeup.com.ng/api/rider/${this.unRiders.ridersCard}`;
+	// 				// this.unRiders.push(element);
+	// 			}
 
-				// const element = this.unVerifiedRiders[i];
-				// this.unRiders.push(element);
+	// 			// const element = this.unVerifiedRiders[i];
+	// 			// this.unRiders.push(element);
 
-			}
-			// console.log(this.unRiders);
-		});
-	}
+	// 		}
+	// 		// console.log(this.unRiders);
+	// 	});
+	// }
 
-	close(riderId) {
-		const obj = {
-			token: this.token,
-			riderId: riderId
-		};
-		this.user.unVerifyRider(obj).subscribe((res: any) => {
-			this.alert.success(res.message);
-			setTimeout(() => {
-			this.router.navigateByUrl('/app/home/riders');
-		}, 3000);
-		});
-
+	close() {
+		this.router.navigateByUrl('/app/home/riders');
 	}
 	accept(riderId) {
 		const obj = {
 			riderId: riderId,
-			token: this.token
+			token: this.token,
+			riderType : this.riderType
 		};
 		this.user.verifyRider(obj).subscribe((res: any) => {
 			// console.log(res);
@@ -104,6 +96,11 @@ export class RidersDetailsComponent implements OnInit {
 				this.alert.danger(res.message);
 			}
 		});
+	}
+
+	change(riderType) {
+		console.log(riderType);
+		this.riderType = riderType;
 	}
 
 }

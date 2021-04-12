@@ -9,6 +9,10 @@ import { ClipboardModule } from "ngx-clipboard";
 import { DataTablesModule } from "angular-datatables";
 import { NgScrollbarModule } from "ngx-scrollbar";
 
+import { OrderModule } from 'ngx-order-pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 import { PerfectScrollbarModule } from "ngx-perfect-scrollbar";
 // import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 // import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -32,6 +36,8 @@ import { ZonesComponent } from '../../pages/zones/zones.component';
 import { InterstateLocationComponent } from '../../pages/interstate-location/interstate-location.component';
 import { InternationalPricingComponent } from '../../pages/international-pricing/international-pricing.component';
 import { InterstateDeliveryComponent } from '../../pages/interstate-delivery/interstate-delivery.component';
+import { InternationalDeliveryComponent } from '../../pages/international-delivery/international-delivery.component';
+import { AssignComponent } from '../../pages/assign/assign.component';
 
 
 // import { ToastrModule } from 'ngx-toastr';
@@ -44,6 +50,9 @@ import { InterstateDeliveryComponent } from '../../pages/interstate-delivery/int
 		ReactiveFormsModule,
 		HttpClientModule,
 		NgbModule,
+		OrderModule,
+		NgxPaginationModule,
+		Ng2SearchPipeModule,
 		NgScrollbarModule,
 		ClipboardModule,
 		DataTablesModule,
@@ -67,7 +76,9 @@ import { InterstateDeliveryComponent } from '../../pages/interstate-delivery/int
 		ZonesComponent,
 		InterstateLocationComponent,
 		InternationalPricingComponent,
-		InterstateDeliveryComponent
+		InterstateDeliveryComponent,
+		InternationalDeliveryComponent,
+		AssignComponent
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

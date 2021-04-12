@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "pickmeupservices-f9e12": {
+      "hosting": {
+        "clubhousetools-dashboard-angular": [
+          "pickmeupservices-f9e12"
+        ]
+      }
+    }
+  }
+}

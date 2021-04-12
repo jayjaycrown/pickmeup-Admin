@@ -27,10 +27,28 @@
 
 				</div>
 				<div class="card-footer">
-					<div class="float-right">
-						<button class="btn btn-danger btn-lg" (click)="close(unRiders.riderId)">Reject</button>
-						<button class="btn btn-success btn-lg" (click)="accept(unRiders.riderId)">Accept</button>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-row">
+								<div class="col-sm-4">
+									<label>Rider Type</label>
+								</div>
+								<div class="col-sm-8">
+									<select name="riderType" placeholder="Rider Type" class="custom-select form-control" [(ngModel)]="riderType"
+										(ngModelChange)="change(riderType)">
+										<option value="internal">Internal</option>
+										<option value="external">External</option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-6 text-right">
+							<button class="btn btn-danger btn-lg" (click)="close()">Reject</button>
+							<button class="btn btn-success btn-lg" (click)="accept(unRiders.riderId)">Accept</button>
+						</div>
 					</div>
+
 				</div>
 			</div>
 		</div>

@@ -96,25 +96,37 @@
 		<div class="col">
 			<div class="card shadow">
 				<div class="card-header border-0">
-					<h3 class="mb-0">Unverified Riders Details</h3>
+					<div class="row">
+						<div class="col-md-9">
+							<h3 class="mb-0">Unverified Riders Details</h3>
+						</div>
+						<div class="col-md-3">
+							<div class="input-group-sm">
+								<input type="text" class="form-control input-sm" name="firstName" [(ngModel)]="firstName"
+									(ngModelChange)="search()">
+							</div>
+						</div>
+					</div>
 				</div>
-				<div style="width: 100%; height:auto">
-					<perfect-scrollbar>
+					<div class="table-responsive">
 						<!-- <div class="table-responsive"> -->
-						<table datatable [dtOptions]="dtOptions" class="table align-items-center">
+						<table class="table align-items-center">
 							<thead class="thead-light">
 								<tr role="row">
-									<th scope="col">SN</th>
-									<th scope="col">Name</th>
-									<th scope="col">Email</th>
+									<!-- <th scope="col">SN</th> -->
+									<th scope="col" (click)="sort('firstName')">First Name &nbsp; <i class="fa fa-sort"></i></th>
+									<th scope="col" (click)="sort('lastName')">Last Name &nbsp; <i class="fa fa-sort"></i></th>
+									<th scope="col" (click)="sort('email')">Email &nbsp; <i class="fa fa-sort"></i></th>
 									<th>Documents</th>
 									<th scope="row">Action</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr *ngFor="let user of unRiders; let i = index" role="row">
-									<td>{{  i + 1  }}</td>
-									<td>{{ user.firstName }} {{ user.lastName }}</td>
+								<tr *ngFor="let user of newunRiders | orderBy: key: reverse | paginate: { itemsPerPage: 5, currentPage: p }"
+									role="row">
+									<!-- <td>{{  i + 1  }}</td> -->
+									<td>{{ user.firstName }} </td>
+									<td>{{ user.lastName }}</td>
 									<td>{{ user.email }}</td>
 									<td>
 										<div>
@@ -137,10 +149,9 @@
 									</td>
 								</tr>
 							</tbody>
+							<pagination-controls (pageChange)="p = $event"></pagination-controls>
 						</table>
-						<!-- </div> -->
-					</perfect-scrollbar>
-				</div>
+					</div>
 
 
 				<!-- <div class="card-footer py-4">
@@ -181,7 +192,7 @@
 				<div style="width: 100%; height:auto">
 					<perfect-scrollbar>
 						<!-- <div class="table-responsive"> -->
-						<table datatable [dtOptions]="dtOptions" class="table align-items-center">
+						<table class="table align-items-center">
 							<thead class="thead-light">
 								<tr role="row">
 									<th scope="col">SN</th>

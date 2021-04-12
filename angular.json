@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "clubhousetools-dashboard-angular": {
+    "pickmeup-dashboard-angular": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -66,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "clubhousetools-dashboard-angular:build"
+            "browserTarget": "pickmeup-dashboard-angular:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "clubhousetools-dashboard-angular:build:production"
+              "browserTarget": "pickmeup-dashboard-angular:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "clubhousetools-dashboard-angular:build"
+            "browserTarget": "pickmeup-dashboard-angular:build"
           }
         },
         "test": {
@@ -110,10 +110,14 @@
               "**/node_modules/**"
             ]
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     },
-    "clubhousetools-dashboard-angular-e2e": {
+    "pickmeup-dashboard-angular-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -121,11 +125,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "clubhousetools-dashboard-angular:serve"
+            "devServerTarget": "pickmeup-dashboard-angular:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "clubhousetools-dashboard-angular:serve:production"
+              "devServerTarget": "pickmeup-dashboard-angular:serve:production"
             }
           }
         },
@@ -141,7 +145,7 @@
       }
     }
   },
-  "defaultProject": "clubhousetools-dashboard-angular",
+  "defaultProject": "pickmeup-dashboard-angular",
   "schematics": {
     "@schematics/angular:component": {
       "styleext": "scss"

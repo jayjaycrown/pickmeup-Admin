@@ -17,13 +17,13 @@ export class LoginComponent implements OnInit {
     error = '';
 	constructor(
 		private formBuilder: FormBuilder,
-        private route: ActivatedRoute,
-        private router: Router,
+    private route: ActivatedRoute,
+    private router: Router,
 		private authenticationService: AuthenticationService,
-				private alertService: AlertService
+		private alertService: AlertService
 
 	) {
-		 if (this.authenticationService.userValue) {
+		if (this.authenticationService.userValue) {
             this.router.navigate(['app/home']);
         }
 	}

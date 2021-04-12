@@ -104,20 +104,30 @@
 		<div class="col-md-6">
 			<div class="card shadow">
 				<div class="card-header border-0">
-					<h3>Country List</h3>
+					<div class="row">
+						<div class="col-md-6">
+							<h3>Country List</h3>
+						</div>
+						<div class="col-md-6">
+							<div class="input-group-sm">
+								<input type="text" class="form-control input-sm" name="countryName" [(ngModel)]="countryName"
+									(ngModelChange)="search()">
+							</div>
+						</div>
+					</div>
 				</div>
-				<table class="table table-striped" datatable [dtOptions]="dtOptions">
-					<thead>
+				<table class="table table-striped">
+					<thead style="cursor: pointer;">
 						<tr>
-							<th>S/N</th>
-							<th>Country Name</th>
-							<th>Zone</th>
+							<!-- <th>S/N</th> -->
+							<th (click)="sort('countryName')">Country Name &nbsp; <i class="fa fa-sort"></i></th>
+							<th (click)="sort('zone')">Zone &nbsp; <i class="fa fa-sort"></i></th>
 							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr *ngFor="let country of countries let i=index">
-							<td> {{ i+1 }} </td>
+						<tr *ngFor="let country of newcountries | orderBy: key: reverse | paginate: { itemsPerPage: 10, currentPage: p }">
+							<!-- <td> {{ i+1 }} </td> -->
 							<td>{{ country.countryName }}</td>
 							<td> {{ country.zone }} </td>
 							<td>
@@ -127,7 +137,11 @@
 							</td>
 						</tr>
 					</tbody>
+
 				</table>
+				<div class="col-12">
+					<pagination-controls (pageChange)="p = $event"></pagination-controls>
+				</div>
 				<!-- <ul class="list-unstyled">
 					<li *ngFor="let item of interWeight" style="border: 1px solid #eee; padding: 10px 20px">
 						{{ item.weightRange }}

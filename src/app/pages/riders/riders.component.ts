@@ -27,10 +27,33 @@ export class RidersComponent implements OnInit {
 	stageCarriage;
 	vehicleLicense;
 	token: any;
+	key = 'id';
+	reverse = false;
+	p = 1;
+	newunRiders: any[];
+	firstName: string;
 	constructor(
 		private user: UserService,
 		private alert: AlertService
 	) {}
+
+	sort(key) {
+		this.key = key;
+		this.reverse = !this.reverse;
+	}
+
+	search() {
+		this.newunRiders = this.unVerifiedRiders;
+		if (this.firstName === '') {
+			this.newunRiders = this.unVerifiedRiders;
+			// this.ngOnInit();
+		} else {
+			this.newunRiders = this.newunRiders.filter(res => {
+				const testing: string = res.firstName;
+				return testing.toLowerCase().match(this.firstName.toLowerCase());
+			});
+		}
+	}
 
 	async ngOnInit(): Promise<void> {
 		const user = await JSON.parse(localStorage.getItem("user"));
@@ -49,14 +72,9 @@ export class RidersComponent implements OnInit {
 	fetchUnverifiedRiders(token) {
 		this.user.fetchUnverifiedRiders(token).subscribe((res: any) => {
 			this.unVerifiedRiders = res.riders;
-			// console.log(res);
-			for (let i = 0; i < res.riders.length; i++) {
+			// console.log(this.unVerifiedRiders);
+				this.newunRiders = this.unVerifiedRiders;
 
-				const element = this.unVerifiedRiders[i];
-				this.unRiders.push(element);
-
-			}
-			// console.log(this.unRiders);
 		});
 	}
 
