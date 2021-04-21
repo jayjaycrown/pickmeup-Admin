@@ -161,7 +161,7 @@ export class AssignComponent implements OnInit, AfterViewInit, OnDestroy {
 
 	getUserRequest() {
 		this.userService.fetchRequestDetails(this.token).subscribe((res: any) => {
-			console.log(res);
+			// console.log(res);
 			this.deliveries = res.deliveries;
 			this.unassignedLength = this.deliveries.length;
 		});
@@ -170,7 +170,7 @@ export class AssignComponent implements OnInit, AfterViewInit, OnDestroy {
 
 	getAssignedRequests() {
 		this.userService.fetchAssignedDeliveries(this.token).subscribe((res: any) => {
-			console.log(res);
+			// console.log(res);
 			this.assignedDeliveries = res.deliveries;
 			this.assignedLength = this.assignedDeliveries.length;
 		});
@@ -178,7 +178,7 @@ export class AssignComponent implements OnInit, AfterViewInit, OnDestroy {
 
 	getPickedUpDeliveries() {
 		this.userService.fetchPickedUpDeliveries(this.token).subscribe((res: any) => {
-			console.log(res);
+			// console.log(res);
 			this.pickedupDeliveries = res.deliveries;
 			this.pickedUpLength = this.pickedupDeliveries.length;
 		});
@@ -186,7 +186,7 @@ export class AssignComponent implements OnInit, AfterViewInit, OnDestroy {
 
 	getCompletedDeliveries() {
 		this.userService.fetchCompletedDeliveries(this.token).subscribe((res: any) => {
-			console.log(res);
+			// console.log(res);
 			this.completedDeliveries = res.deliveries;
 			this.completedLength = this.completedDeliveries.length;
 
@@ -214,7 +214,7 @@ export class AssignComponent implements OnInit, AfterViewInit, OnDestroy {
 		const driverWithDistance = [];
 		this.errormessage = '';
 		this.userService.fetchAvailableRiders(this.token).subscribe((res: any) => {
-			console.log(res);
+			// console.log(res);
 			if (res.success !== true) {
 				this.alertService.danger('No Available Driver');
 			} else {
@@ -228,7 +228,7 @@ export class AssignComponent implements OnInit, AfterViewInit, OnDestroy {
 					// console.log(text);
 					const driverLocation = JSON.parse(text);
 					const location = driverLocation[0];
-					console.log(driverLocation[1]);
+					// console.log(driverLocation[1]);
 
 					// if (element.includes(location)) {
 					// 		element[index] = location;
@@ -243,7 +243,7 @@ export class AssignComponent implements OnInit, AfterViewInit, OnDestroy {
 							travelMode: google.maps.TravelMode.DRIVING,
 							unitSystem: google.maps.UnitSystem.METRIC,
 						}, (result: any) => {
-							console.log(result);
+							// console.log(result);
 							if (result.rows[0].elements[0].status === "ZERO_RESULTS") {
 								this.alertService.danger('No route could be found between the origin and destination.');
 
@@ -280,7 +280,7 @@ export class AssignComponent implements OnInit, AfterViewInit, OnDestroy {
 							} else {
 								// alert(result.status);
 							}
-						console.log('Result distance (mts) -- ', result.rows[0].elements[0].distance.text);
+						// console.log('Result distance (mts) -- ', result.rows[0].elements[0].distance.text);
 					});
 					// this.geo.getDistancia2(pickupaddress, driverLocation).then((resp: any) => {
 					// 	// console.log(res);
@@ -381,9 +381,9 @@ export class AssignComponent implements OnInit, AfterViewInit, OnDestroy {
 			riderId: riderId,
 			deliveryType: this.requestType
 		};
-		console.log(data);
+		// console.log(data);
 		this.userService.assignRider(data).subscribe((res: any) => {
-			console.log(res);
+			// console.log(res);
 			if (res.success === true) {
 				this.alertService.success(res.message);
 				this.decline();

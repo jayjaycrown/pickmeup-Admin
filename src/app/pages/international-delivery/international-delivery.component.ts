@@ -38,7 +38,7 @@ dtOptions: DataTables.Settings = {};
 
 	fetchOfficeDeliveries(token) {
 		this.user.officeInternationalDeliveries(token).subscribe((res: any) => {
-			console.log(res);
+			// console.log(res);
 			this.deliveries = res.deliveries;
 		}, err => {
 				console.error(err);
@@ -62,7 +62,7 @@ dtOptions: DataTables.Settings = {};
 			reference: this.reference,
 			dhlTrackingNumber: this.model.dhlTrackingNumber
 		};
-		console.log(obj);
+		// console.log(obj);
 		this.user.addDHLToTrackingInternational(obj).subscribe((res: any) => {
 			this.loading = false;
 			if (res.success === true) {

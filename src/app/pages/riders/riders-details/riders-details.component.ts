@@ -99,7 +99,7 @@ export class RidersDetailsComponent implements OnInit {
 	}
 
 	change(riderType) {
-		console.log(riderType);
+		// console.log(riderType);
 		this.riderType = riderType;
 	}
 

@@ -72,7 +72,7 @@ export class LocationComponent implements OnInit, OnDestroy {
 		};
 		// console.log(data);
 		this.user.fetchStateZones(data).subscribe((res: any) => {
-			console.log(res);
+			// console.log(res);
 			this.stateZones = res.zones;
 		});
 	}
@@ -85,11 +85,11 @@ export class LocationComponent implements OnInit, OnDestroy {
 	// }
 	fetchState(token) {
 		this.user.fetchState(token).subscribe((res: any) => {
-			console.log(res);
+			// console.log(res);
 			// console.log(res.states);
 			// console.log(res.states[0]);
 			this.states = res.states;
-			console.log(this.states);
+			// console.log(this.states);
 			this.dtTrigger.next();
 			// if (res.status === true) {
 			// // for (let i = 0; i < res.states.length; i++) {
@@ -102,10 +102,10 @@ export class LocationComponent implements OnInit, OnDestroy {
 
 	fetchArea(token) {
 		this.user.fetchArea(token).subscribe((res: any) => {
-			console.log(res);
+			// console.log(res);
 
 			this.areas = res.areas;
-			console.log(this.areas);
+			// console.log(this.areas);
 			this.dtTrigger.next();
 			// if (res.status === true) {
 			// // for (let i = 0; i < res.states.length; i++) {
@@ -136,7 +136,7 @@ export class LocationComponent implements OnInit, OnDestroy {
 
 	onSubmit() {
 		this.loading = true;
-		console.log(this.areamodel);
+		// console.log(this.areamodel);
 		if (!this.areas.some((item) => item.areaName === this.areamodel.areaName)) {
 			this.user.createArea(this.areamodel).subscribe((res: any) => {
 			this.loading = false;
@@ -157,7 +157,7 @@ export class LocationComponent implements OnInit, OnDestroy {
 			}
 	createNewState() {
 		this.loading = true;
-		console.log(this.model);
+		// console.log(this.model);
 		if (!this.states.some((item) => item.stateName === this.model.stateName.toLowerCase())) {
 			this.user.createState(this.model).subscribe((res: any) => {
 			this.loading = false;

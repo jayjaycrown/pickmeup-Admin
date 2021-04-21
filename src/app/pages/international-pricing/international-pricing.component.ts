@@ -59,7 +59,7 @@ export class InternationalPricingComponent implements OnInit {
 	}
 	fetchInternational(token) {
 		this.user.fetchInternational(token).subscribe((res: any) => {
-			console.log(res);
+			// console.log(res);
 			this.zones = res.zones;
 		});
 	}
@@ -95,7 +95,7 @@ export class InternationalPricingComponent implements OnInit {
 
 	addInterPrice(editForm: NgForm) {
 		this.pricing = { ...this.price, ...editForm };
-		console.log(this.pricing);
+		// console.log(this.pricing);
 		this.decline();
 
 	}
@@ -107,10 +107,10 @@ export class InternationalPricingComponent implements OnInit {
 			zone: this.model.zone,
 			pricing: this.pricing
 		};
-		console.log(obj);
+		// console.log(obj);
 		this.user.createInternationalPricing(obj).subscribe((res: any) => {
 			this.loading = false;
-			console.log(res);
+			// console.log(res);
 			if (res.success === true) {
 				this.alertService.success(res.message);
 				this.model.length = 0;
@@ -130,9 +130,9 @@ export class InternationalPricingComponent implements OnInit {
 			rangeId: this.editmodel.rangeId,
 			price: this.editmodel.price
 		};
-		console.log(this.editmodel);
+		// console.log(this.editmodel);
 		this.user.editInternationalPricing(this.editmodel).subscribe((res: any) => {
-			console.log(res);
+			// console.log(res);
 			this.loading = false;
 			if (res.success === true) {
 				this.alertService.success(res.message);
@@ -153,7 +153,7 @@ export class InternationalPricingComponent implements OnInit {
 		};
 		// console.log(this.countrymodel);
 		this.user.createCountry(this.countrymodel).subscribe((res: any) => {
-			console.log(res);
+			// console.log(res);
 			this.countrymodel.length = 0;
 			this.loading = false;
 			if (res.success === true) {

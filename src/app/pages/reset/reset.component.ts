@@ -40,17 +40,17 @@ resetForm: FormGroup;
 
 	onSubmit() {
         this.submitted = true;
-		console.log(this.resetForm.value);
+		// console.log(this.resetForm.value);
         // stop here if form is invalid
 		if (this.resetForm.invalid) {
-			console.log('Invalid');
+			// console.log('Invalid');
             return;
         }
 
         this.loading = true;
         this.authenticationService.resetPassword(this.resetForm.value)
 					.subscribe((res: any) => {
-						console.log(res);
+						// console.log(res);
 						if (res.success === true) {
 							this.loading = false;
 							this.alertService.success(res.message);

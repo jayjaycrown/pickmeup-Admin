@@ -16,11 +16,11 @@ export class UserProfileComponent implements OnInit {
 		const user = await JSON.parse(localStorage.getItem("user"));
 		// console.log(user);
 		const token = user.token;
-		console.log(token);
+		// console.log(token);
 		this.user.getAdminProfile(token).subscribe((res: any) => {
 			// console.log(res);
 			this.adminDetails = res.adminDetails;
-			console.log(this.adminDetails);
+			// console.log(this.adminDetails);
 		});
 	}
 

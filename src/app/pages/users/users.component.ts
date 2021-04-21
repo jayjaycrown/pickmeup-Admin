@@ -24,10 +24,10 @@ export class UsersComponent implements OnInit {
 
 	fetchVerifiedRiders(token) {
 		this.user.fetchUsers(token).subscribe((res: any) => {
-			console.log(res);
+			// console.log(res);
 			this.users = res.users;
 			// console.log(res);
-			console.log(this.users);
+			// console.log(this.users);
 
 		});
 	}

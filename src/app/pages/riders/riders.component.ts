@@ -88,7 +88,7 @@ export class RidersComponent implements OnInit {
 	fetchVerifiedRiders(token) {
 		this.vRiders = [];
 		this.user.fetchVerifiedRiders(token).subscribe((res: any) => {
-			console.log(res);
+			// console.log(res);
 			this.verifiedRiders = res.riders;
 			// console.log(res);
 			for (let i = 0; i < res.riders.length; i++) {
@@ -107,7 +107,7 @@ export class RidersComponent implements OnInit {
 			riderId: riderId
 		};
 		this.user.unVerifyRider(obj).subscribe((res: any) => {
-			console.log(res);
+			// console.log(res);
 			this.alert.success(res.message);
 			this.fetchVerifiedRiders(this.token);
 			this.fetchUnverifiedRiders(this.token);
@@ -138,9 +138,9 @@ export class RidersComponent implements OnInit {
 			token: this.token,
 			amount: this.model.amount
 		}
-		console.log(obj);
+		// console.log(obj);
 		this.user.payRider(obj).subscribe((res: any) => {
-			console.log(res)
+			// console.log(res)
 			if (res.success === true  ) {
 					this.alert.success(res.message)
 			} else {

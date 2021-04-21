@@ -52,11 +52,11 @@ export class ZonesComponent implements OnInit {
 
 	fetchStateZone(model) {
 		this.user.fetchStateZones(model).subscribe((res: any) => {
-			console.log(res);
+			// console.log(res);
 			// console.log(res.states);
 			// console.log(res.states[0]);
 			this.zones = res.zones;
-			console.log(this.zones);
+			// console.log(this.zones);
 			this.dtTrigger.next();
 			// if (res.status === true) {
 			// // for (let i = 0; i < res.states.length; i++) {
@@ -69,7 +69,7 @@ export class ZonesComponent implements OnInit {
 
 	addPrice(template: TemplateRef<any>, zone: any) {
 		this.checkzone = zone.toLowerCase();
-		console.log(this.zone);
+		// console.log(this.zone);
 		// alert(this.zone);
     this.modalRef = this.modalService.show(template);
 	}
@@ -81,7 +81,7 @@ export class ZonesComponent implements OnInit {
 	AddNewPrice(addnewPrice) {
 		this.pricing = { ...this.price, ...addnewPrice };
 		// this.pricing = addnewPrice;
-		console.log(this.pricing);
+		// console.log(this.pricing);
 		this.decline();
 	}
 
@@ -91,10 +91,10 @@ export class ZonesComponent implements OnInit {
 		let zone = this.model.zone;
 		zone = zone.toLowerCase();
 		this.model = { pricing: this.pricing , token: this.token, zone: zone, stateId: this.id};
-		console.log(this.model);
+		// console.log(this.model);
 		this.user.createStateZone(this.model).subscribe((res: any) => {
 			this.loading = false;
-			console.log(res);
+			// console.log(res);
 			this.alertService.success(res.message);
 		});
 	}

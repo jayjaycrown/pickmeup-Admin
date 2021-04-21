@@ -39,7 +39,7 @@ export class InterstateDeliveryComponent implements OnInit {
 
 	fetchOfficeDeliveries(token) {
 		this.user.officeInterstateDeliveries(token).subscribe((res: any) => {
-			console.log(res);
+			// console.log(res);
 			this.deliveries = res.deliveries;
 		}, err => {
 				console.error(err);
@@ -63,7 +63,7 @@ export class InterstateDeliveryComponent implements OnInit {
 			reference: this.reference,
 			dhlTrackingNumber: this.model.dhlTrackingNumber
 		};
-		console.log(obj);
+		// console.log(obj);
 		this.user.addDHLToTracking(obj).subscribe((res: any) => {
 			this.loading = false;
 			if (res.success === true) {

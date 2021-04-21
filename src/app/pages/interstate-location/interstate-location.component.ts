@@ -52,7 +52,7 @@ export class InterstateLocationComponent implements OnInit {
 
 	fetchInterPrice(token) {
 		this.user.fetchInterstate(token).subscribe((res: any) => {
-			console.log(res);
+			// console.log(res);
 			this.prices = res.prices;
 			this.newPrice = this.prices;
 		});
@@ -66,9 +66,9 @@ export class InterstateLocationComponent implements OnInit {
 			southWestPrice: this.model.southWestPrice,
 			otherPrice: this.model.otherPrice
 		};
-		console.log(this.model);
+		// console.log(this.model);
 		this.user.editInterstate(this.model).subscribe((res: any) => {
-			console.log(res);
+			// console.log(res);
 			if (res.success === true) {
 				this.alertService.success(res.message);
 				this.loading = false;

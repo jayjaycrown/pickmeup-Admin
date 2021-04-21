@@ -38,7 +38,7 @@ export class InterstateComponent implements OnInit {
 
 	fetchOfficeDeliveries(token) {
 		this.user.fetchInterstateRequests(token).subscribe((res: any) => {
-			console.log(res);
+			// console.log(res);
 			this.deliveries = res.deliveries;
 		}, err => {
 				console.error(err);
