@@ -41,13 +41,13 @@ export class AssignComponent implements OnInit, AfterViewInit, OnDestroy {
 	riders: any;
 	requestType: any;
 	refresh;
-	key = 'id';
-	key1 = 'id';
+	key = 'distance';
+	key1 = 'date';
 	key2 = 'id';
 	key3 = 'id';
 	key4 = 'id';
 	reverse = false;
-	reverse1 = false;
+	reverse1 = true;
 	reverse2 = false;
 	reverse3 = false;
 	reverse4 = false;
@@ -131,27 +131,30 @@ export class AssignComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.getAssignedRequests();
 		this.getPickedUpDeliveries();
 		this.getCompletedDeliveries();
-		// this.refresh = setInterval(() => {
-		// 	this.fetchAvailableRiders();
-		// }, 30000);
+		this.refresh = setInterval(() => {
+			this.getUserRequest();
+		this.getAssignedRequests();
+		this.getPickedUpDeliveries();
+		this.getCompletedDeliveries();
+		}, 60000);
 
 	}
 	ngOnDestroy() {
-		// if (this.refresh) {
-		// 	clearInterval(this.refresh);
-		// }
+		if (this.refresh) {
+			clearInterval(this.refresh);
+		}
 	}
 
-	async fetchAvailableRiders() {
-		this.userService.fetchAvailableRiders(this.token).subscribe((res: any) => {
-			console.log(res);
-			if (res.success !== true) {
-				this.alertService.danger('No Available Driver');
-			} else {
-				this.driver = res.riders;
-			}
-		});
-	}
+	// async fetchAvailableRiders() {
+	// 	this.userService.fetchAvailableRiders(this.token).subscribe((res: any) => {
+	// 		console.log(res);
+	// 		if (res.success !== true) {
+	// 			this.alertService.danger('No Available Driver');
+	// 		} else {
+	// 			this.driver = res.riders;
+	// 		}
+	// 	});
+	// }
 	ngAfterViewInit(): void {
 		// this.gettwoDistance();
 	}
@@ -189,26 +192,27 @@ export class AssignComponent implements OnInit, AfterViewInit, OnDestroy {
 
 		});
 	}
-	getUserLocation() {
-		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(position => {
-				console.log(position);
-				this.lat = position.coords.latitude;
-				this.lng = position.coords.longitude;
-				// console.log(this.lat, this.lng);
-				const locations = this.geo.getLocations(500, [this.lat, this.lng]);
-				// console.log('locations: ', locations);
-				// const distance = this.geo.distanceBetween(this.lat, this.lng);
-				// console.log('Distance: ', distance);
-			});
-			// console.log('lat: ' + this.lat + ', Lng: ' + this.lng);
-		}
-	}
+	// getUserLocation() {
+	// 	if (navigator.geolocation) {
+	// 		navigator.geolocation.getCurrentPosition(position => {
+	// 			console.log(position);
+	// 			this.lat = position.coords.latitude;
+	// 			this.lng = position.coords.longitude;
+	// 			// console.log(this.lat, this.lng);
+	// 			const locations = this.geo.getLocations(500, [this.lat, this.lng]);
+	// 			// console.log('locations: ', locations);
+	// 			// const distance = this.geo.distanceBetween(this.lat, this.lng);
+	// 			// console.log('Distance: ', distance); pickupState
+	// 		});
+	// 		// console.log('lat: ' + this.lat + ', Lng: ' + this.lng);
+	// 	}
+	// }
 
 	async gettwoDistance(pickupaddress) {
 		// alert(this.newpickupAddress);
 		// await this.fetchAvailableRiders();
 		const driverWithDistance = [];
+		this.errormessage = '';
 		this.userService.fetchAvailableRiders(this.token).subscribe((res: any) => {
 			console.log(res);
 			if (res.success !== true) {
@@ -218,19 +222,54 @@ export class AssignComponent implements OnInit, AfterViewInit, OnDestroy {
 				const driverlist = this.driver;
 				for (let index = 0; index < driverlist.length; index++) {
 					let element = driverlist[index];
-					const driverLocation = element.location;
+					const okay = element.location;
+					element.location = '';
+					const text = okay.replace(/&quot;/g, '"');
+					// console.log(text);
+					const driverLocation = JSON.parse(text);
+					const location = driverLocation[0];
+					console.log(driverLocation[1]);
+
+					// if (element.includes(location)) {
+					// 		element[index] = location;
+					// }
 					// });
-					this.geo.getDistance2(pickupaddress, driverLocation).subscribe((resp: any) => {
-						// console.log(res);
-						// console.log(res.rows[0].elements[0]);
-						if (resp.status === 'OK') {
-							const result = resp.rows[0].elements[0];
-							if (result.status === "OK") {
+					// tslint:disable-next-line: max-line-length
+					const testing = new google.maps.DistanceMatrixService();
+					testing.getDistanceMatrix(
+						{
+							'origins': [pickupaddress],
+							'destinations': [driverLocation[1]],
+							travelMode: google.maps.TravelMode.DRIVING,
+							unitSystem: google.maps.UnitSystem.METRIC,
+						}, (result: any) => {
+							console.log(result);
+							if (result.rows[0].elements[0].status === "ZERO_RESULTS") {
+								this.alertService.danger('No route could be found between the origin and destination.');
+
+							} else if (result.rows[0].elements[0].status === "NOT_FOUND") {
+								this.alertService.danger('The origin and/or destination of this pairing could not be geocoded.');
+							} else {
 								const distance = {
-									distance: result.distance.text
+									distance: result.rows[0].elements[0].distance.value
+								};
+									element = { ...element, ...location };
+								element = { ...element, ...distance };
+								element.distance = result.rows[0].elements[0].distance.value;
+								element.location = location;
+
+								driverWithDistance.push(element);
+								this.driver = driverWithDistance;
+							}
+							if (this.errormessage) {
+							this.alertService.danger(this.errormessage);
+						}
+						if (result.status === "OK") {
+								const distance = {
+									distance:   result.rows[0].elements[0].distance.text
 								};
 								element = { ...element, ...distance };
-								element.distance = result.distance.text;
+								element.distance =  result.rows[0].elements[0].distance.text;
 
 								driverWithDistance.push(element);
 								this.driver = driverWithDistance;
@@ -239,17 +278,40 @@ export class AssignComponent implements OnInit, AfterViewInit, OnDestroy {
 							} else if (result.status === "ZERO_RESULTS") {
 									this.errormessage = 'No route could be found between the origin and destination.';
 							} else {
-								alert(result.status);
+								// alert(result.status);
 							}
-
-							} else {
-								alert(resp.status);
-						}
-
-						if (this.errormessage) {
-							this.alertService.danger(this.errormessage);
-						}
+						console.log('Result distance (mts) -- ', result.rows[0].elements[0].distance.text);
 					});
+					// this.geo.getDistancia2(pickupaddress, driverLocation).then((resp: any) => {
+					// 	// console.log(res);
+					// 	// console.log(res.rows[0].elements[0]);
+					// 	if (resp.status === 'OK') {
+					// 		const result = resp.rows[0].elements[0];
+					// 		if (result.status === "OK") {
+					// 			const distance = {
+					// 				distance: result.distance.text
+					// 			};
+					// 			element = { ...element, ...distance };
+					// 			element.distance = result.distance.text;
+
+					// 			driverWithDistance.push(element);
+					// 			this.driver = driverWithDistance;
+					// 		} else if (result.status === "NOT_FOUND") {
+					// 			this.errormessage = 'The origin and/or destination of this pairing could not be geocoded.';
+					// 		} else if (result.status === "ZERO_RESULTS") {
+					// 				this.errormessage = 'No route could be found between the origin and destination.';
+					// 		} else {
+					// 			alert(result.status);
+					// 		}
+
+					// 		} else {
+					// 			alert(resp.status);
+					// 	}
+
+					// 	if (this.errormessage) {
+					// 		this.alertService.danger(this.errormessage);
+					// 	}
+					// });
 
 
 				}
@@ -257,20 +319,20 @@ export class AssignComponent implements OnInit, AfterViewInit, OnDestroy {
 		});
 	}
 
-	getDistance(origen, destino) {
-		return new google.maps.DistanceMatrixService().getDistanceMatrix({
-			'origins': [origen],
-			'destinations': [destino],
-			travelMode: google.maps.TravelMode.DRIVING,
-			unitSystem: google.maps.UnitSystem.METRIC,
-			avoidHighways: false,
-			avoidTolls: false
-		}, (results: any) => {
-			// console.log(results);
-			return results;
-			console.log('result Distance (mts) -- ', results.rows[0].elements[0].distance.value);
-		});
-	}
+	// getDistance(origen, destino) {
+	// 	return new google.maps.DistanceMatrixService().getDistanceMatrix({
+	// 		'origins': [origen],
+	// 		'destinations': [destino],
+	// 		travelMode: google.maps.TravelMode.DRIVING,
+	// 		unitSystem: google.maps.UnitSystem.METRIC,
+	// 		avoidHighways: false,
+	// 		avoidTolls: false
+	// 	}, (results: any) => {
+	// 		// console.log(results);
+	// 		return results;
+	// 		console.log('result Distance (mts) -- ', results.rows[0].elements[0].distance.value);
+	// 	});
+	// }
 
 	// getDistance(origin, destination) {
 	//   const distanceService = new google.maps.DistanceMatrixService();
@@ -300,9 +362,9 @@ export class AssignComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.modalRef.hide();
 	}
 
-	openModal(template: TemplateRef<any>, reference, pickupAddress, pickupArea, type: string) {
+	openModal(template: TemplateRef<any>, reference, pickupAddress, pickupArea, pickupState, type: string) {
 		this.newreference = reference;
-		this.newpickupAddress = `${pickupAddress}, ${pickupArea}` ;
+		this.newpickupAddress = `${pickupAddress}, ${pickupArea}, ${pickupState}` ;
 		this.requestType = type.toLowerCase();
 		this.modalRef = this.modalRef = this.modalService.show(
 			template,

@@ -90,9 +90,17 @@ export class FirebaseService {
 	}
 
 	getDistance2(origin, destination) {
-		const url = '';
-		const api = environment.googleMapsKey;
+			const api = environment.googleMapsKey;
+		const url = `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}&destinations=${destination}&key=${api}`;
+		// const httpOptions = '';
+
 		// tslint:disable-next-line: max-line-length
-		return this.http.get(`https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}&destinations=${destination}&key=${api}`).pipe();
+		return this.http.get(url).pipe();
 	}
+
+	public getDistancia2(origen: string, destino: string) {
+    new google.maps.DistanceMatrixService().getDistanceMatrix({'origins': [origen], 'destinations': [destino], travelMode: google.maps.TravelMode.DRIVING}, (results: any) => {
+			console.log('resultados distancia (mts) -- ', results.rows[0].elements[0].distance.value);
+    });
+}
 }

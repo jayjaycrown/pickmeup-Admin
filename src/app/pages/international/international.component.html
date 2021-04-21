@@ -1,0 +1,83 @@
+<div class="header bg-yellow pb-8 pt-5 pt-lg-8 d-flex align-items-center">
+	<!-- Mask -->
+	<!-- <span class="mask header-color"></span> -->
+	<!-- Header container -->
+	<div class="container-fluid d-flex align-items-center">
+		<div class="row">
+			<div class="col">
+				<!-- <h1 class="display-2 ">Hello Jesse</h1> -->
+				<!-- <p class=" mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p> -->
+
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid mt--7">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="card shadow">
+				<div class="card-header border-0">
+					<div class="row">
+						<div class="col-12">
+							<h3 class="mb-0">International Pending Requests</h3>
+						</div>
+						<!-- <div class="col-4 text-right">
+							<button class="btn btn-primary">Add State</button>
+						</div> -->
+					</div>
+
+				</div>
+				<div style="width: 100%; height:auto">
+					<!-- <perfect-scrollbar> -->
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead class="thead-light">
+								<tr >
+									<th scope="col">Sender Name</th>
+									<th scope="col">Sender Phone</th>
+									<th>Pickup Address</th>
+									<th>Receiver Name</th>
+									<th>Receiver Phone</th>
+									<th>Dropoff Address</th>
+									<th>Dropoff State</th>
+									<th>Date</th>
+									<th>Parcel Type</th>
+									<th scope="col">Weight</th>
+										<th>Payment Method</th>
+									<th scope="col">Reference</th>
+									<th>Price</th>
+									<th>Payment Status</th>
+									<th scope="col">Delivery StatusStatus</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let item of deliveries; let i= index" >
+									<td>{{ item.senderName }}</td>
+									<td>{{ item.senderPhone }}</td>
+									<td>{{ item.pickupAddress }}</td>
+									<td>{{ item.receiverName }}</td>
+									<td>{{ item.receiverPhone }}</td>
+									<td>{{ item.dropoffAddress }}</td>
+									<td>{{ item.dropoffState }}</td>
+									<td>{{ item.date }}</td>
+									<td>{{ item.parcelType }}</td>
+									<td>{{ item.weight }}</td>
+									<td>{{ item.paymentMethod }}</td>
+									<td>{{ item.reference }}</td>
+									<td> {{ item.price | currency: '₦' }} </td>
+									<td>
+										<span *ngIf="item.isPaid === 'true'">Paid</span>
+										<span *ngIf="item.isPaid !== 'true'">Not Paid</span>
+									</td>
+									<td>{{ item.status }}</td>
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- </perfect-scrollbar> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

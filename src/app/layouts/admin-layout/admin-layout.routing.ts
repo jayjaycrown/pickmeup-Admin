@@ -21,6 +21,8 @@ import { InternationalPricingComponent } from '../../pages/international-pricing
 import { InterstateDeliveryComponent } from '../../pages/interstate-delivery/interstate-delivery.component';
 import { InternationalDeliveryComponent } from '../../pages/international-delivery/international-delivery.component';
 import { AssignComponent } from '../../pages/assign/assign.component';
+import { InterstateComponent } from '../../pages/interstate/interstate.component';
+import { InternationalComponent } from '../../pages/international/international.component';
 
 export const AdminLayoutRoutes: Routes = [
 		{path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -40,9 +42,11 @@ export const AdminLayoutRoutes: Routes = [
 	{ path: 'location/:id', component: ZonesComponent },
 	{ path: 'users', component: UsersComponent },
 	{ path: 'users/:id', component: UserDetailsComponent },
-	{ path: 'interstate', component: InterstateLocationComponent },
-	{ path: 'international', component: InternationalPricingComponent },
+	{ path: 'interstatePricing', component: InterstateLocationComponent },
+	{ path: 'interstate', component: InterstateComponent},
+	{ path: 'internationalPricing', component: InternationalPricingComponent },
 	{ path: 'interstateDelivery', component: InterstateDeliveryComponent },
 	{ path: 'internationalDelivery', component: InternationalDeliveryComponent },
+	{ path: 'international', component: InternationalComponent},
 	{ path: 'assign', component: AssignComponent }
 ];

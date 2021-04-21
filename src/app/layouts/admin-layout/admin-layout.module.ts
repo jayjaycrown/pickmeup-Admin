@@ -38,6 +38,8 @@ import { InternationalPricingComponent } from '../../pages/international-pricing
 import { InterstateDeliveryComponent } from '../../pages/interstate-delivery/interstate-delivery.component';
 import { InternationalDeliveryComponent } from '../../pages/international-delivery/international-delivery.component';
 import { AssignComponent } from '../../pages/assign/assign.component';
+import { InterstateComponent } from '../../pages/interstate/interstate.component';
+import { InternationalComponent } from '../../pages/international/international.component';
 
 
 // import { ToastrModule } from 'ngx-toastr';
@@ -75,9 +77,11 @@ import { AssignComponent } from '../../pages/assign/assign.component';
 		UserDetailsComponent,
 		ZonesComponent,
 		InterstateLocationComponent,
+		InterstateComponent,
 		InternationalPricingComponent,
 		InterstateDeliveryComponent,
 		InternationalDeliveryComponent,
+		InternationalComponent,
 		AssignComponent
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],

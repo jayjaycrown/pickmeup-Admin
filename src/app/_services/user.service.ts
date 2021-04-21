@@ -183,4 +183,9 @@ export class UserService {
 		return  this.http.post<any>(`${environment.apiUrl}/fetch-pickedup-deliveries.php`, {token})
 			.pipe();
 	}
+
+	payRider(data) {
+		return  this.http.post<any>(`${environment.apiUrl}/pay-rider.php`, data)
+			.pipe();
+	}
 }

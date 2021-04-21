@@ -4,13 +4,12 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
 import { NgForm } from "@angular/forms";
 import { AlertService } from '@full-fledged/alerts';
-
 @Component({
-  selector: 'app-interstate-delivery',
-  templateUrl: './interstate-delivery.component.html',
-  styleUrls: ['./interstate-delivery.component.css']
+  selector: 'app-interstate',
+  templateUrl: './interstate.component.html',
+  styleUrls: ['./interstate.component.css']
 })
-export class InterstateDeliveryComponent implements OnInit {
+export class InterstateComponent implements OnInit {
 	dtOptions: DataTables.Settings = {};
 	token: any;
 	deliveries: any;
@@ -38,45 +37,11 @@ export class InterstateDeliveryComponent implements OnInit {
 	}
 
 	fetchOfficeDeliveries(token) {
-		this.user.officeInterstateDeliveries(token).subscribe((res: any) => {
+		this.user.fetchInterstateRequests(token).subscribe((res: any) => {
 			console.log(res);
 			this.deliveries = res.deliveries;
 		}, err => {
 				console.error(err);
-		});
-	}
-
-	decline(): void {
-    this.message = 'Declined!';
-    this.modalRef.hide();
-	}
-
-	openModal(template: TemplateRef<any>, reference) {
-		this.reference = reference;
-    this.modalRef = this.modalService.show(template);
-	}
-
-	addDHLTracking(tracking) {
-		this.loading = true;
-		const obj = {
-			token: this.token,
-			reference: this.reference,
-			dhlTrackingNumber: this.model.dhlTrackingNumber
-		};
-		console.log(obj);
-		this.user.addDHLToTracking(obj).subscribe((res: any) => {
-			this.loading = false;
-			if (res.success === true) {
-				this.alertService.success(res.message);
-				this.decline();
-				this.fetchOfficeDeliveries(this.token);
-			} else {
-				this.alertService.danger(res.message);
-				this.decline();
-			}
-		}, err => {
-			this.loading = false;
-			console.error(err);
 		});
 	}
 }

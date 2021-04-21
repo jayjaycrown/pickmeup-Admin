@@ -37,7 +37,7 @@ dtOptions: DataTables.Settings = {};
 	}
 
 	fetchOfficeDeliveries(token) {
-		this.user.fetchInternationalRequests(token).subscribe((res: any) => {
+		this.user.officeInternationalDeliveries(token).subscribe((res: any) => {
 			console.log(res);
 			this.deliveries = res.deliveries;
 		}, err => {

@@ -30,9 +30,9 @@ export class DashboardComponent implements OnInit {
 	) {}
 
 	getSummary(token) {
-		console.log(token);
+		// console.log(token);
 		this.user.fetchSummary(token).subscribe((res: any) => {
-			console.log(res);
+			// console.log(res);
 			this.summary = res.summary;
 		});
 	}
@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
 		const user = await JSON.parse(localStorage.getItem("user"));
 		// console.log(user);
 		const token = user.token;
-		console.log(token);
+		// console.log(token);
 		this.getSummary(token);
 		this.user.getAdminProfile(token).subscribe((res: any) => {
 			// console.log(res);

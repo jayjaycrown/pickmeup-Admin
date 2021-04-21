@@ -1,7 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit , ElementRef, TemplateRef} from "@angular/core";
 import { AlertService } from "@full-fledged/alerts";
 import { UserService } from '../../_services/user.service';
-
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 interface Person {
 	Id: number;
 	Name: string;
@@ -17,9 +17,11 @@ interface Person {
 export class RidersComponent implements OnInit {
 	dtOptions: DataTables.Settings = {};
 	unRiders = [];
+	model: any = {};
 	unVerifiedRiders: any;
 	verifiedRiders: any;
 	vRiders = [];
+	loading = false;
 	vIndex: number;
 	unIndex: number;
 	details = 'https://pickmeup.com.ng/api/rider/';
@@ -32,9 +34,13 @@ export class RidersComponent implements OnInit {
 	p = 1;
 	newunRiders: any[];
 	firstName: string;
+	message: string;
+	modalRef: BsModalRef;
+	riderId: any;
 	constructor(
 		private user: UserService,
-		private alert: AlertService
+		private alert: AlertService,
+		private modalService: BsModalService,
 	) {}
 
 	sort(key) {
@@ -70,6 +76,7 @@ export class RidersComponent implements OnInit {
 	}
 
 	fetchUnverifiedRiders(token) {
+		this.newunRiders = [];
 		this.user.fetchUnverifiedRiders(token).subscribe((res: any) => {
 			this.unVerifiedRiders = res.riders;
 			// console.log(this.unVerifiedRiders);
@@ -79,6 +86,7 @@ export class RidersComponent implements OnInit {
 	}
 
 	fetchVerifiedRiders(token) {
+		this.vRiders = [];
 		this.user.fetchVerifiedRiders(token).subscribe((res: any) => {
 			console.log(res);
 			this.verifiedRiders = res.riders;
@@ -104,6 +112,44 @@ export class RidersComponent implements OnInit {
 			this.fetchVerifiedRiders(this.token);
 			this.fetchUnverifiedRiders(this.token);
 		});
+
+	}
+
+		decline(): void {
+    this.message = 'Declined!';
+    this.modalRef.hide();
+	}
+
+	openModal(template: TemplateRef<any>, reference) {
+		// this.reference = reference;
+    this.modalRef = this.modalService.show(template);
+	}
+
+	payRider(template: TemplateRef<any>, riderId) {
+		this.riderId = riderId;
+		this.modalRef = this.modalService.show(template);
+		// console.log(riderId);
+	}
+
+	MakePayment() {
+		this.loading = true;
+		const obj = {
+			riderId: this.riderId,
+			token: this.token,
+			amount: this.model.amount
+		}
+		console.log(obj);
+		this.user.payRider(obj).subscribe((res: any) => {
+			console.log(res)
+			if (res.success === true  ) {
+					this.alert.success(res.message)
+			} else {
+					this.alert.danger(res.message)
+			}
+			this.loading = false;
+			this.decline();
+		})
+
 
 	}
 }

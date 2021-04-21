@@ -24,6 +24,12 @@ export const ROUTES: RouteInfo[] = [
 	},
 	{
 		path: "interstate",
+		title: "Interstate Requests",
+		icon: "ni-pin-3 text-custom",
+		class: "",
+	},
+	{
+		path: "interstatePricing",
 		title: "Interstate Pricing",
 		icon: "ni-pin-3 text-custom",
 		class: "",
@@ -36,6 +42,12 @@ export const ROUTES: RouteInfo[] = [
 	},
 	{
 		path: "international",
+		title: "International Requests",
+		icon: "ni-pin-3 text-custom",
+		class: "",
+	},
+	{
+		path: "internationalPricing",
 		title: "International Pricing",
 		icon: "ni-pin-3 text-custom",
 		class: "",

@@ -40,6 +40,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFirestore } from '@angular/fire/firestore';
 // import { AgmCoreModule } from '@agm/core';
 import { environment } from '../environments/environment';
+// import { InterstateComponent } from './pages/interstate/interstate.component';
+// import { InternationalComponent } from './pages/international/international.component';
 
 
 
@@ -77,6 +79,8 @@ import { environment } from '../environments/environment';
 		AppComponent,
 		AdminLayoutComponent,
 		AuthLayoutComponent,
+		// InterstateComponent,
+		// InternationalComponent,
 		// AssignComponent,
 		// InternationalDeliveryComponent,
 		// InterstateDeliveryComponent,
