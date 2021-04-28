@@ -32,12 +32,12 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 // import { RequestDetailsComponent } from './pages/requests/request-details/request-details.component';
 
 
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFirestore } from '@angular/fire/firestore';
+// import { AngularFireModule } from '@angular/fire';
+// import { AngularFirestoreModule } from '@angular/fire/firestore';
+// import { AngularFireStorageModule } from '@angular/fire/storage';
+// import { AngularFireAuthModule } from '@angular/fire/auth';
+// import { AngularFireDatabaseModule } from '@angular/fire/database';
+// import { AngularFirestore } from '@angular/fire/firestore';
 // import { AgmCoreModule } from '@agm/core';
 import { environment } from '../environments/environment';
 // import { InterstateComponent } from './pages/interstate/interstate.component';
@@ -65,11 +65,11 @@ import { environment } from '../environments/environment';
 		AccordionModule.forRoot(),
 		ModalModule.forRoot(),
 		AlertModule.forRoot({ maxMessages: 3, timeout: 3000, positionX: 'right' }),
-		AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule, // firestore
-    AngularFireAuthModule, // auth
-		AngularFireStorageModule, // storage
-		AngularFireDatabaseModule,
+		// AngularFireModule.initializeApp(environment.firebaseConfig),
+    // AngularFirestoreModule, // firestore
+    // AngularFireAuthModule, // auth
+		// AngularFireStorageModule, // storage
+		// AngularFireDatabaseModule,
 		// AgmCoreModule.forRoot({
 		// 	apiKey: environment.googleMapsKey,
 		// 	libraries: ['geometry']
@@ -88,7 +88,7 @@ import { environment } from '../environments/environment';
 	],
 	providers: [
 		// BsModalService,
-		AngularFirestore
+		// AngularFirestore
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 	bootstrap: [AppComponent]

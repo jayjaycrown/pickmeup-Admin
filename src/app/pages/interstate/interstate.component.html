@@ -48,7 +48,8 @@
 									<th scope="col">Reference</th>
 									<th>Price</th>
 									<th>Payment Status</th>
-									<th scope="col">Delivery StatusStatus</th>
+                  <th scope="col">Delivery StatusStatus</th>
+                  <th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -68,10 +69,13 @@
 									<td>{{ item.reference }}</td>
 									<td> {{ item.price | currency: '₦' }} </td>
 									<td>
-										<span *ngIf="item.isPaid === true">Paid</span>
-										<span *ngIf="item.isPaid !== true">Not Paid</span>
+										<span *ngIf="item.isPaid === 'true'">Paid</span>
+										<span *ngIf="item.isPaid !== 'true'">Not Paid</span>
 									</td>
-									<td>{{ item.status }}</td>
+                  <td>{{ item.status }}</td>
+                  <td>
+                    <button class="btn btn-sm btn-primary" (click)="packageArrive(item.reference)">Arrival</button>
+                  </td>
 
 								</tr>
 							</tbody>

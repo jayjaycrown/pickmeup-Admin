@@ -30,8 +30,6 @@ export class AuthenticationService {
 				password,
 			})
 			.pipe(
-
-
 				map((user: any) => {
         const token = (user.token);
         if (token !== undefined) {

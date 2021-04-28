@@ -188,4 +188,14 @@ export class UserService {
 		return  this.http.post<any>(`${environment.apiUrl}/pay-rider.php`, data)
 			.pipe();
 	}
+
+	arriveToOffice(data) {
+		return  this.http.post<any>(`${environment.apiUrl}/arrive-to-office.php`, data)
+			.pipe();
+	}
+
+		sendBroadcastMessage(data) {
+		return  this.http.post<any>(`${environment.apiUrl}/send-broadcast-message.php`, data)
+			.pipe();
+	}
 }

@@ -10,7 +10,6 @@ import { AlertService } from '@full-fledged/alerts';
   styleUrls: ['./interstate.component.css']
 })
 export class InterstateComponent implements OnInit {
-	dtOptions: DataTables.Settings = {};
 	token: any;
 	deliveries: any;
 	message: string;
@@ -25,23 +24,37 @@ export class InterstateComponent implements OnInit {
 	) { }
 
 	async ngOnInit(): Promise<void> {
-			this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 5
-    };
 		const user = await JSON.parse(localStorage.getItem("user"));
 
 		// console.log(user);
 		this.token = user.token;
-		this.fetchOfficeDeliveries(this.token);
+		this.fetchOfficeDeliveries();
 	}
 
-	fetchOfficeDeliveries(token) {
-		this.user.fetchInterstateRequests(token).subscribe((res: any) => {
+	fetchOfficeDeliveries() {
+		this.user.fetchInterstateRequests(this.token).subscribe((res: any) => {
 			// console.log(res);
 			this.deliveries = res.deliveries;
 		}, err => {
 				console.error(err);
 		});
+	}
+
+	packageArrive( reference) {
+		const data = {
+			token: this.token,
+			deliveryType: 'interstate',
+			reference
+		}
+		// console.log(data);
+		this.user.arriveToOffice(data).subscribe((res: any) => {
+			// console.log(res);
+			if (res.success === true) {
+				this.alertService.success(res.message);
+				this.fetchOfficeDeliveries();
+			} else {
+				this.alertService.danger(res.message);
+			}
+		})
 	}
 }

@@ -33,8 +33,8 @@
 						<table class="table table-striped">
 							<thead class="thead-light">
 								<tr >
-									<th scope="col">Sender Name</th>
-									<th scope="col">Sender Phone</th>
+									<th  >Sender Name</th>
+									<th  >Sender Phone</th>
 									<th>Pickup Address</th>
 									<th>Receiver Name</th>
 									<th>Receiver Phone</th>
@@ -42,12 +42,13 @@
 									<th>Dropoff State</th>
 									<th>Date</th>
 									<th>Parcel Type</th>
-									<th scope="col">Weight</th>
+									<th  >Weight</th>
 										<th>Payment Method</th>
-									<th scope="col">Reference</th>
+									<th  >Reference</th>
 									<th>Price</th>
 									<th>Payment Status</th>
-									<th scope="col">Delivery StatusStatus</th>
+									<th  >Delivery StatusStatus</th>
+									<th>Action</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -70,6 +71,9 @@
 										<span *ngIf="item.isPaid !== 'true'">Not Paid</span>
 									</td>
 									<td>{{ item.status }}</td>
+									<td>
+										<button class="btn btn-sm btn-primary" (click)="packageArrive(item.reference)">Arrival</button>
+									</td>
 
 								</tr>
 							</tbody>

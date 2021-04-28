@@ -30,15 +30,15 @@
 				<div style="width: 100%; height:auto">
 					<!-- <perfect-scrollbar> -->
 					<div class="table-responsive">
-						<table datatable [dtOptions]="dtOptions" class="table align-items-center">
+						<table class="table">
 							<thead class="thead-light">
 								<tr role="row">
-									<th scope="col">SN</th>
-									<th scope="col">Sender Name</th>
-									<th scope="col">Phone</th>
-									<th scope="col">Weight</th>
-									<th scope="col">Reference</th>
-									<th scope="col">Status</th>
+									<th >SN</th>
+									<th >Sender Name</th>
+									<th >Phone</th>
+									<th >Weight</th>
+									<th >Reference</th>
+									<th >Status</th>
 									<th>Action</th>
 								</tr>
 							</thead>
@@ -51,7 +51,7 @@
 									<td>{{ item.reference }}</td>
 									<td>{{ item.status }}</td>
 									<td>
-										<button type="button" class="btn btn-clear btn-sm" (click)="openModal(template, item.reference)">Add
+										<button type="button" class="btn btn-primary btn-sm" (click)="openModal(template, item.reference)">Add
 											DHL Tracking</button>
 									</td>
 								</tr>

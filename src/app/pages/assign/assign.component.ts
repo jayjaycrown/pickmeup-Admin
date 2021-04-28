@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, TemplateRef, OnDestroy } from '@angular/core';
 // import { ɵTestingCompiler } from '@angular/core/testing';
-import { FirebaseService } from '../../_services/firebase.service';
+// import { FirebaseService } from '../../_services/firebase.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AlertService } from '@full-fledged/alerts';
 // declare var google: any;
@@ -69,7 +69,7 @@ export class AssignComponent implements OnInit, AfterViewInit, OnDestroy {
 	completedLength: number;
 	pickedUpLength: number;
 	constructor(
-		private geo: FirebaseService,
+		// private geo: FirebaseService,
 		private userService: UserService,
 		private modalService: BsModalService,
 		private alertService: AlertService

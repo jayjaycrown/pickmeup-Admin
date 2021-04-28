@@ -35,6 +35,7 @@ export class LocationComponent implements OnInit, OnDestroy {
 	areas: any;
 	token: any;
 	stateZones: any;
+	role: any;
 	constructor(
 		private element: ElementRef,
 		private router: Router,
@@ -52,6 +53,13 @@ export class LocationComponent implements OnInit, OnDestroy {
 		// console.log(token);
 			this.model = { token: this.token };
 			this.areamodel = { token: this.token };
+
+			this.user.getAdminProfile(this.token).subscribe((res: any) => {
+			// console.log(res);
+			this.role = res.adminDetails.role;
+			// alert(this.role);
+			})
+
 		this.fetchState(this.token);
 		this.fetchArea(this.token);
 			// this.fetchStateZone(this.token);

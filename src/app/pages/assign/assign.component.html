@@ -125,8 +125,24 @@
 									<td>{{ item.senderPhone }}</td>
 									<td>{{ item.date }}</td>
 									<td>{{ item.receiverName }}</td>
-									<td>{{ item.dropoffAddress }}, {{ item.dropoffArea }}, {{ item.pickupState }}</td>
-									<td>{{ item.receiverPhone }}</td>
+									<td>
+										<div *ngIf="!item.dropoffInfo;else templateName">
+											{{ item.dropoffAddress }}, {{ item.dropoffArea }}
+
+										</div>
+										<ng-template #templateName>
+											Multiple
+										</ng-template>
+									</td>
+									<!-- <td>{{ item.dropoffAddress }}, {{ item.dropoffArea }}, {{ item.pickupState }}</td> -->
+									<td>
+										<div *ngIf="!item.dropoffInfo;else templateName">
+												{{ item.receiverPhone }}
+										</div>
+										<ng-template #templateName>
+										{{ item.dropoffInfo[0].phone }}
+										</ng-template>
+									</td>
 									<td>{{ item.price }}</td>
 									<td>{{ item.type }}</td>
 									<td>{{ item.paymentMethod }}</td>
@@ -183,8 +199,26 @@
 								<td>{{ item.pickupAddress }}, {{ item.pickupArea }}</td>
 								<td>{{ item.senderPhone }}</td>
 								<td>{{ item.receiverName }}</td>
-								<td>{{ item.dropoffAddress }}, {{ item.dropoffArea }} </td>
-								<td>{{ item.receiverPhone }}</td>
+									<td>
+										<div *ngIf="!item.dropoffInfo;else templateName">
+											{{ item.dropoffAddress }}, {{ item.dropoffArea }}
+
+										</div>
+										<ng-template #templateName>
+											Multiple
+										</ng-template>
+									</td>
+									<!-- <td>{{ item.dropoffAddress }}, {{ item.dropoffArea }}, {{ item.pickupState }}</td> -->
+									<td>
+										<div *ngIf="!item.dropoffInfo;else templateName">
+											{{ item.receiverPhone }}
+										</div>
+										<ng-template #templateName>
+											{{ item.dropoffInfo[0].phone }}
+										</ng-template>
+									</td>
+								<!-- <td>{{ item.dropoffAddress }}, {{ item.dropoffArea }} </td> -->
+								<!-- <td>{{ item.receiverPhone }}</td> -->
 								<td>{{ item.price }}</td>
 								<td>{{ item.type }}</td>
 								<td>{{ item.paymentMethod }}</td>
@@ -240,8 +274,26 @@
 									<td>{{ item.pickupAddress }}, {{ item.pickupArea }}</td>
 									<td>{{ item.senderPhone }}</td>
 									<td>{{ item.receiverName }}</td>
-									<td>{{ item.dropoffAddress }}, {{ item.dropoffArea }}</td>
-									<td>{{ item.receiverPhone }}</td>
+									<!-- <td>{{ item.dropoffAddress }}, {{ item.dropoffArea }}</td> -->
+									<!-- <td>{{ item.receiverPhone }}</td> -->
+										<td>
+											<div *ngIf="!item.dropoffInfo;else templateName">
+												{{ item.dropoffAddress }}, {{ item.dropoffArea }}
+
+											</div>
+											<ng-template #templateName>
+												Multiple
+											</ng-template>
+										</td>
+										<!-- <td>{{ item.dropoffAddress }}, {{ item.dropoffArea }}, {{ item.pickupState }}</td> -->
+										<td>
+											<div *ngIf="!item.dropoffInfo;else templateName">
+												{{ item.receiverPhone }}
+											</div>
+											<ng-template #templateName>
+												{{ item.dropoffInfo[0].phone }}
+											</ng-template>
+										</td>
 									<td>{{ item.price }}</td>
 									<td>{{ item.type }}</td>
 									<td>{{ item.paymentMethod }}</td>
@@ -294,10 +346,19 @@
 									*ngFor="let item of completedDeliveries| orderBy: key4: reverse4 | paginate: { itemsPerPage: 10, currentPage: t
 									}">
 									<td> {{ item.senderName }} </td>
-									<td>{{ item.pickupAddress }}, {{ item.pickupAres }}</td>
+									<td>{{ item.pickupAddress }}, {{ item.pickupArea }}</td>
 									<td>{{ item.senderPhone }}</td>
 									<td>{{ item.receiverName }}</td>
-									<td>{{ item.dropoffAddress }}, {{ item.dropoffArea }}</td>
+
+									<td>
+										<div *ngIf="item.dropoffInfo.length === 0;else templateName">
+												{{ item.dropoffAddress }}, {{ item.dropoffArea }}
+												<ng-template #templateName>
+													Multiple ({{ item.dropoffInfo.length }})
+												</ng-template>
+										</div>
+
+									</td>
 									<td>{{ item.receiverPhone }}</td>
 									<td>{{ item.price }}</td>
 									<td>{{ item.type }}</td>

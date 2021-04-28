@@ -33,16 +33,34 @@ dtOptions: DataTables.Settings = {};
 
 		// console.log(user);
 		this.token = user.token;
-		this.fetchOfficeDeliveries(this.token);
+		this.fetchOfficeDeliveries();
 	}
 
-	fetchOfficeDeliveries(token) {
-		this.user.fetchInternationalRequests(token).subscribe((res: any) => {
+	fetchOfficeDeliveries() {
+		this.user.fetchInternationalRequests(this.token).subscribe((res: any) => {
 			// console.log(res);
 			this.deliveries = res.deliveries;
 		}, err => {
 				console.error(err);
 		});
+	}
+
+	packageArrive( reference) {
+		const data = {
+			token: this.token,
+			deliveryType: 'international',
+			reference
+		}
+		// console.log(data);
+		this.user.arriveToOffice(data).subscribe((res: any) => {
+			// console.log(res);
+			if (res.success === true) {
+				this.alertService.success(res.message);
+				this.fetchOfficeDeliveries();
+			} else {
+				this.alertService.danger(res.message);
+			}
+		})
 	}
 
 }

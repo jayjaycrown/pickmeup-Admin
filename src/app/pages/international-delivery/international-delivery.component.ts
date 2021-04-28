@@ -10,7 +10,6 @@ import { AlertService } from '@full-fledged/alerts';
   styleUrls: ['./international-delivery.component.css']
 })
 export class InternationalDeliveryComponent implements OnInit {
-dtOptions: DataTables.Settings = {};
 	token: any;
 	deliveries: any;
 	message: string;
@@ -24,11 +23,7 @@ dtOptions: DataTables.Settings = {};
 		private alertService: AlertService
 	) { }
 
-		async ngOnInit(): Promise<void> {
-			this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 5
-    };
+	async ngOnInit(): Promise<void> {
 		const user = await JSON.parse(localStorage.getItem("user"));
 
 		// console.log(user);
