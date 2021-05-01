@@ -65,9 +65,9 @@ export class AssignComponent implements OnInit, AfterViewInit, OnDestroy {
 	pickedupDeliveries: any[];
 	completedDeliveries: any[];
 	unassignedLength: any;
-	assignedLength: number;
-	completedLength: number;
-	pickedUpLength: number;
+	assignedLength: any;
+	completedLength: any;
+	pickedUpLength: any;
 	constructor(
 		// private geo: FirebaseService,
 		private userService: UserService,

@@ -23,6 +23,7 @@ import { InternationalDeliveryComponent } from '../../pages/international-delive
 import { AssignComponent } from '../../pages/assign/assign.component';
 import { InterstateComponent } from '../../pages/interstate/interstate.component';
 import { InternationalComponent } from '../../pages/international/international.component';
+import { BroadcastNotificationsComponent } from "../../pages/broadcast-notifications/broadcast-notifications.component";
 
 export const AdminLayoutRoutes: Routes = [
 		{path: '', redirectTo: 'dashboard', pathMatch: 'full'},
@@ -35,6 +36,7 @@ export const AdminLayoutRoutes: Routes = [
 	{ path: "requests", component: RequestsComponent },
 	{ path: "requests/:id", component: RequestDetailsComponent },
 	{ path: "broadcasts", component: BroadcastsComponent },
+	{ path: "notifications", component: BroadcastNotificationsComponent },
 	{ path: "inbox", component: InboxComponent },
 	{ path: "riders", component: RidersComponent },
 	{ path: "riders/:id", component: RidersDetailsComponent },

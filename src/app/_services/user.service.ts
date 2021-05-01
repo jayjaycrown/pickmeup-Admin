@@ -194,8 +194,13 @@ export class UserService {
 			.pipe();
 	}
 
-		sendBroadcastMessage(data) {
+	sendBroadcastMessage(data) {
 		return  this.http.post<any>(`${environment.apiUrl}/send-broadcast-message.php`, data)
+			.pipe();
+	}
+
+	sendBroadcastNotifications(data) {
+		return  this.http.post<any>(`${environment.apiUrl}/send-broadcast-push-notification.php`, data)
 			.pipe();
 	}
 }

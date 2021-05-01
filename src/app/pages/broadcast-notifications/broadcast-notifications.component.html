@@ -1,0 +1,62 @@
+<div class="header bg-yellow pb-8 pt-5 pt-lg-8 d-flex align-items-center">
+	<!-- Mask -->
+	<span class="mask header-color"></span>
+	<!-- Header container -->
+	<div class="container-fluid d-flex align-items-center">
+	</div>
+</div>
+<div class="container-fluid mt--7">
+	<div class="row">
+		<div class=" col-md-8 offset-md-2 col-sm-12">
+			<div class="card shadow">
+				<div class="card-header">
+					Send Broadcast Notifications
+				</div>
+				<Div class="card-body">
+					<form name="form" #broadcastForm="ngForm" (ngSubmit)="broadcastForm.valid && onSubmit()">
+						<div class="row">
+							<div class="col-12">
+								<grammarly-extension data-grammarly-shadow-root="true" class="cGcvT"
+									style="position: absolute; top: 0px; left: 0px; pointer-events: none;"></grammarly-extension>
+								<div class="form-group">
+									<input type="text" name="title" placeholder="Title" autocomplete="off" class="form-control"
+										[(ngModel)]="model.heading" #heading="ngModel" required>
+								</div>
+								<div class="form-group">
+									<textarea id="message" class="form-control" name="message" rows="4" style="width: 100%;"
+										placeholder="Message (Not More than 160 characters)" maxlength="160" required="" spellcheck="false"
+										[(ngModel)]="model.message" #message="ngModel"></textarea>
+								</div>
+								<!-- <div class="form-group">
+									<select class="select2 form-control" required>
+										<option>- Send to -</option>
+										<option value="1">Customers</option>
+										<option value="2">Riders</option>
+										<option value="3">Vendors</option>
+										<option value="4">Everybody</option>
+									</select>
+								</div> -->
+								<!-- <div class="form-group">
+									<select class="select2 form-control" name="method" required="">
+										<option>- Via -</option>
+										<option value="1">E-Mail</option>
+										<option value="2">In-App Inbox</option>
+										<option value="3">Push Notification</option>
+									</select>
+								</div> -->
+							</div>
+							<div class="col-md-6 offset-md-3">
+								<div class="form-group xs-pt-10">
+									<button type="submit" [disabled]="!broadcastForm.valid" class="btn btn-primary">
+										<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+										Send Message
+									</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</Div>
+			</div>
+		</div>
+	</div>
+</div>

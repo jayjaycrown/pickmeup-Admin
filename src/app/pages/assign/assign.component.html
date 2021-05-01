@@ -351,15 +351,22 @@
 									<td>{{ item.receiverName }}</td>
 
 									<td>
-										<div *ngIf="item.dropoffInfo.length === 0;else templateName">
-												{{ item.dropoffAddress }}, {{ item.dropoffArea }}
-												<ng-template #templateName>
-													Multiple ({{ item.dropoffInfo.length }})
-												</ng-template>
-										</div>
+										<div *ngIf="!item.dropoffInfo;else templateName">
+											{{ item.dropoffAddress }}, {{ item.dropoffArea }}
 
+										</div>
+										<ng-template #templateName>
+											Multiple
+										</ng-template>
 									</td>
-									<td>{{ item.receiverPhone }}</td>
+									<td>
+										<div *ngIf="!item.dropoffInfo;else templateName">
+											{{ item.receiverPhone }}
+										</div>
+										<ng-template #templateName>
+											{{ item.dropoffInfo[0].phone }}
+										</ng-template>
+									</td>
 									<td>{{ item.price }}</td>
 									<td>{{ item.type }}</td>
 									<td>{{ item.paymentMethod }}</td>

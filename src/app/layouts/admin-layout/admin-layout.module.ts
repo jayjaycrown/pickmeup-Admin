@@ -40,6 +40,8 @@ import { InternationalDeliveryComponent } from '../../pages/international-delive
 import { AssignComponent } from '../../pages/assign/assign.component';
 import { InterstateComponent } from '../../pages/interstate/interstate.component';
 import { InternationalComponent } from '../../pages/international/international.component';
+import { BroadcastNotificationsComponent } from "../../pages/broadcast-notifications/broadcast-notifications.component";
+
 
 
 // import { ToastrModule } from 'ngx-toastr';
@@ -82,7 +84,8 @@ import { InternationalComponent } from '../../pages/international/international.
 		InterstateDeliveryComponent,
 		InternationalDeliveryComponent,
 		InternationalComponent,
-		AssignComponent
+		AssignComponent,
+		BroadcastNotificationsComponent
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

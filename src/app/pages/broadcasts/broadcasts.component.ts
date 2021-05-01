@@ -47,7 +47,7 @@ export class BroadcastsComponent implements OnInit {
 			heading: this.model.heading,
 			messageArray: split
 		}
-		console.log(obj);
+		// console.log(obj);
 		this.user.sendBroadcastMessage(obj).subscribe((res: any) => {
 			console.log(res);
 				this.loading = false;

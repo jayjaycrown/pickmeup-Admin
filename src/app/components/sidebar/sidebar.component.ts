@@ -111,6 +111,13 @@ export const ROUTES: RouteInfo[] = [
 		class: "",
 		role: "admin"
 	},
+	{
+		path: "notifications",
+		title: "Notifications",
+		icon: "ni-circle-08 text-custom",
+		class: "",
+		role: "admin"
+	},
 	// {
 	// 	path: "inbox",
 	// 	title: "Inbox",
