@@ -414,7 +414,7 @@
 							<th>Action</th>
 						</thead>
 						<tbody>
-							<tr *ngFor="let item of driver| orderBy: key: reverse | paginate: { itemsPerPage: 5, currentPage: p }">
+							<tr *ngFor="let item of driver|orderBy: key: reverse | paginate: { itemsPerPage: 5, currentPage: p }">
 								<td> {{ item.firstName  }} {{ item.lastName }} </td>
 								<td> {{item.phone}} </td>
 								<td > {{ item?.location }} </td>
